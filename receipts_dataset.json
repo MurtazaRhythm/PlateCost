@@ -1,0 +1,52 @@
+[
+  {
+    "supplier": "THE SILICON VALLEY SPROUT",
+    "date": "01/31/2026",
+    "items": [
+      {
+        "name": "Honeycrisp Apples",
+        "price": "$7.50"
+      },
+      {
+        "name": "Organic Baby Spinach",
+        "price": "$4.00"
+      },
+      {
+        "name": "Organic Chicken Breast",
+        "price": "$12.50"
+      },
+      {
+        "name": "Grass-Fed Ground Beef",
+        "price": "$9.00"
+      },
+      {
+        "name": "Greek Yogurt (Large)",
+        "price": "$9.00"
+      },
+      {
+        "name": "Salted Butter",
+        "price": "$6.25"
+      },
+      {
+        "name": "Salted Butter",
+        "price": "$5.25"
+      },
+      {
+        "name": "Quinoa (Pre-washed)",
+        "price": "$5.50"
+      },
+      {
+        "name": "Sparkling Water (6pk)",
+        "price": "$4.50"
+      },
+      {
+        "name": "Ginger Kombucha",
+        "price": "$6.25"
+      },
+      {
+        "name": "Eco-Frientlly Dish Soap",
+        "price": "$6.25"
+      }
+    ]
+  }
+]

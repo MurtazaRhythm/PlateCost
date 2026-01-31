@@ -3,6 +3,8 @@ import numpy as np
 import easyocr
 import sys
 import re
+import json
+from pathlib import Path
 
 
 def preprocess_receipt(img_path):
@@ -55,6 +57,7 @@ def parse_receipt(lines):
     date = None
     items = []
     prev_non_price = None
+    seen_items = set()  # avoid duplicate name/price pairs
 
     def normalize_price(raw):
         if not raw:
@@ -85,16 +88,28 @@ def parse_receipt(lines):
         if m_price and (line.strip() != m_price.group(0)):
             price = normalize_price(m_price.group(0))
             name = line.replace(m_price.group(0), '').strip(' :-')
-            if name and not any(k in name.lower() for k in skip_keywords):
+            key = (name.lower(), price) if name else None
+            if (
+                name
+                and not any(k in name.lower() for k in skip_keywords)
+                and key not in seen_items
+            ):
                 items.append({"name": name, "price": price})
+                seen_items.add(key)
                 prev_non_price = None
                 continue
 
         # Price on its own line: pair with previous non-price line
         if m_price and line.strip() == m_price.group(0):
             price = normalize_price(m_price.group(0))
-            if prev_non_price and not any(k in prev_non_price.lower() for k in skip_keywords):
-                items.append({"name": prev_non_price.strip(), "price": price})
+            if (
+                prev_non_price
+                and not any(k in prev_non_price.lower() for k in skip_keywords)
+            ):
+                key = (prev_non_price.strip().lower(), price)
+                if key not in seen_items:
+                    items.append({"name": prev_non_price.strip(), "price": price})
+                    seen_items.add(key)
             prev_non_price = None
             continue
 
@@ -108,11 +123,47 @@ def parse_receipt(lines):
     return {"supplier": supplier, "date": date, "items": items}
 
 
+def save_receipt_json(data, dataset_path="receipts_dataset.json", compact=False):
+    """
+    Write the single receipt to output_path and append/merge into dataset_path.
+    If compact is True, JSON is written without extra whitespace; otherwise it is pretty-printed.
+    """
+    json_kwargs = {"ensure_ascii": False}
+    if compact:
+        json_kwargs["separators"] = (",", ":")
+    else:
+        json_kwargs["indent"] = 2
+
+    # Save single receipt
+    with open("receipts_dataset.json", "w", encoding="utf-8") as f:
+        json.dump(data, f, **json_kwargs)
+
+    dataset_file = Path(dataset_path)
+    existing = []
+    if dataset_file.exists():
+        try:
+            with open(dataset_file, "r", encoding="utf-8") as f:
+                existing = json.load(f)
+            if not isinstance(existing, list):
+                existing = []
+        except Exception:
+            existing = []
+    # Avoid duplicates (same supplier/date/items)
+    if data not in existing:
+        existing.append(data)
+    with open(dataset_file, "w", encoding="utf-8") as f:
+        json.dump(existing, f, **json_kwargs)
+
+
 if __name__ == "__main__":
     receipt = sys.argv[1]
     lines = run_ocr(receipt)
     parsed = parse_receipt(lines)
 
+    # Export JSON outputs
+    save_receipt_json(parsed)
+
+    # Console preview
     print(f"Supplier: {parsed.get('supplier', '')}")
     print(f"Date: {parsed.get('date', '')}")
     print("Items:")

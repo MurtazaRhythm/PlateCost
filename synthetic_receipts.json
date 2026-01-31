@@ -1,0 +1,191 @@
+[
+  {
+    "supplier": "Valley Fresh Market",
+    "date": "01/31/2025",
+    "items": [
+      {"name": "Roma Tomatoes", "price": "$2.80"},
+      {"name": "Baby Spinach", "price": "$3.50"},
+      {"name": "Chicken Breast", "price": "$12.00"},
+      {"name": "Eggs (Dozen)", "price": "$4.20"},
+      {"name": "Whole Milk (1gal)", "price": "$4.90"},
+      {"name": "Brown Rice (5lb)", "price": "$7.60"},
+      {"name": "Olive Oil (1L)", "price": "$11.50"},
+      {"name": "Black Beans (Canned)", "price": "$1.60"},
+      {"name": "Greek Yogurt (Large)", "price": "$8.90"},
+      {"name": "Sparkling Water (12pk)", "price": "$9.50"}
+    ]
+  },
+  {
+    "supplier": "Valley Fresh Market",
+    "date": "02/07/2025",
+    "items": [
+      {"name": "Roma Tomatoes", "price": "$3.08"},
+      {"name": "Baby Spinach", "price": "$3.85"},
+      {"name": "Chicken Breast", "price": "$13.20"},
+      {"name": "Eggs (Dozen)", "price": "$4.54"},
+      {"name": "Whole Milk (1gal)", "price": "$5.15"},
+      {"name": "Brown Rice (5lb)", "price": "$8.25"},
+      {"name": "Olive Oil (1L)", "price": "$12.30"},
+      {"name": "Greek Yogurt (Large)", "price": "$9.45"},
+      {"name": "Sparkling Water (12pk)", "price": "$10.25"},
+      {"name": "Avocados (3ct)", "price": "$5.20"},
+      {"name": "Ground Beef (2lb)", "price": "$11.80"},
+      {"name": "Cheddar Cheese Block", "price": "$6.75"}
+    ]
+  },
+  {
+    "supplier": "Valley Fresh Market",
+    "date": "02/14/2025",
+    "items": [
+      {"name": "Roma Tomatoes", "price": "$3.35"},
+      {"name": "Baby Spinach", "price": "$4.05"},
+      {"name": "Chicken Breast", "price": "$14.10"},
+      {"name": "Eggs (Dozen)", "price": "$4.85"},
+      {"name": "Whole Milk (1gal)", "price": "$5.45"},
+      {"name": "Brown Rice (5lb)", "price": "$8.75"},
+      {"name": "Olive Oil (1L)", "price": "$12.85"},
+      {"name": "Greek Yogurt (Large)", "price": "$9.95"},
+      {"name": "Avocados (3ct)", "price": "$5.55"},
+      {"name": "Cheddar Cheese Block", "price": "$7.10"},
+      {"name": "Old-Fashioned Oats (2lb)", "price": "$4.40"},
+      {"name": "Almond Milk (64oz)", "price": "$4.70"}
+    ]
+  },
+  {
+    "supplier": "Harbor Wholesale Foods",
+    "date": "02/21/2025",
+    "items": [
+      {"name": "Roma Tomatoes", "price": "$3.52"},
+      {"name": "Baby Spinach", "price": "$4.30"},
+      {"name": "Chicken Breast", "price": "$14.95"},
+      {"name": "Whole Milk (1gal)", "price": "$5.80"},
+      {"name": "Brown Rice (5lb)", "price": "$9.10"},
+      {"name": "Olive Oil (1L)", "price": "$13.35"},
+      {"name": "Greek Yogurt (Large)", "price": "$10.45"},
+      {"name": "Avocados (3ct)", "price": "$5.90"},
+      {"name": "Old-Fashioned Oats (2lb)", "price": "$4.85"},
+      {"name": "Almond Milk (64oz)", "price": "$5.05"},
+      {"name": "Salmon Fillets (2lb)", "price": "$17.80"},
+      {"name": "Basmati Rice (5lb)", "price": "$9.85"}
+    ]
+  },
+  {
+    "supplier": "Harbor Wholesale Foods",
+    "date": "02/28/2025",
+    "items": [
+      {"name": "Roma Tomatoes", "price": "$3.70"},
+      {"name": "Baby Spinach", "price": "$4.55"},
+      {"name": "Chicken Breast", "price": "$15.40"},
+      {"name": "Whole Milk (1gal)", "price": "$6.05"},
+      {"name": "Brown Rice (5lb)", "price": "$9.50"},
+      {"name": "Olive Oil (1L)", "price": "$13.95"},
+      {"name": "Greek Yogurt (Large)", "price": "$10.95"},
+      {"name": "Avocados (3ct)", "price": "$6.35"},
+      {"name": "Old-Fashioned Oats (2lb)", "price": "$5.25"},
+      {"name": "Basmati Rice (5lb)", "price": "$10.45"},
+      {"name": "Broccoli Crowns (2lb)", "price": "$4.35"},
+      {"name": "Fresh Mozzarella (1lb)", "price": "$7.85"}
+    ]
+  },
+  {
+    "supplier": "Harbor Wholesale Foods",
+    "date": "03/07/2025",
+    "items": [
+      {"name": "Baby Spinach", "price": "$4.90"},
+      {"name": "Chicken Breast", "price": "$15.95"},
+      {"name": "Whole Milk (1gal)", "price": "$6.35"},
+      {"name": "Brown Rice (5lb)", "price": "$9.95"},
+      {"name": "Olive Oil (1L)", "price": "$14.60"},
+      {"name": "Greek Yogurt (Large)", "price": "$11.35"},
+      {"name": "Avocados (3ct)", "price": "$6.75"},
+      {"name": "Basmati Rice (5lb)", "price": "$10.95"},
+      {"name": "Broccoli Crowns (2lb)", "price": "$4.70"},
+      {"name": "Fresh Mozzarella (1lb)", "price": "$8.35"},
+      {"name": "Cage-Free Eggs (Dozen)", "price": "$5.35"},
+      {"name": "Honey Granola (2lb)", "price": "$6.20"}
+    ]
+  },
+  {
+    "supplier": "Green Valley Provisions",
+    "date": "03/14/2025",
+    "items": [
+      {"name": "Baby Spinach", "price": "$5.10"},
+      {"name": "Chicken Breast", "price": "$16.60"},
+      {"name": "Whole Milk (1gal)", "price": "$6.60"},
+      {"name": "Brown Rice (5lb)", "price": "$10.35"},
+      {"name": "Olive Oil (1L)", "price": "$15.05"},
+      {"name": "Greek Yogurt (Large)", "price": "$11.85"},
+      {"name": "Basmati Rice (5lb)", "price": "$11.55"},
+      {"name": "Broccoli Crowns (2lb)", "price": "$4.95"},
+      {"name": "Fresh Mozzarella (1lb)", "price": "$8.75"},
+      {"name": "Cage-Free Eggs (Dozen)", "price": "$5.60"},
+      {"name": "Honey Granola (2lb)", "price": "$6.55"},
+      {"name": "Kale Bunches", "price": "$3.90"},
+      {"name": "Sliced Turkey Breast (1lb)", "price": "$7.90"}
+    ]
+  },
+  {
+    "supplier": "Green Valley Provisions",
+    "date": "03/21/2025",
+    "items": [
+      {"name": "Baby Spinach", "price": "$5.35"},
+      {"name": "Chicken Breast", "price": "$17.25"},
+      {"name": "Whole Milk (1gal)", "price": "$6.90"},
+      {"name": "Brown Rice (5lb)", "price": "$10.75"},
+      {"name": "Olive Oil (1L)", "price": "$15.55"},
+      {"name": "Greek Yogurt (Large)", "price": "$12.35"},
+      {"name": "Basmati Rice (5lb)", "price": "$12.10"},
+      {"name": "Fresh Mozzarella (1lb)", "price": "$9.10"},
+      {"name": "Cage-Free Eggs (Dozen)", "price": "$5.90"},
+      {"name": "Honey Granola (2lb)", "price": "$6.95"},
+      {"name": "Kale Bunches", "price": "$4.15"},
+      {"name": "Sliced Turkey Breast (1lb)", "price": "$8.45"},
+      {"name": "Strawberries (2lb)", "price": "$6.80"},
+      {"name": "Coconut Water (6pk)", "price": "$9.20"}
+    ]
+  },
+  {
+    "supplier": "Green Valley Provisions",
+    "date": "03/28/2025",
+    "items": [
+      {"name": "Baby Spinach", "price": "$5.60"},
+      {"name": "Chicken Breast", "price": "$17.95"},
+      {"name": "Whole Milk (1gal)", "price": "$7.15"},
+      {"name": "Brown Rice (5lb)", "price": "$11.15"},
+      {"name": "Olive Oil (1L)", "price": "$16.10"},
+      {"name": "Greek Yogurt (Large)", "price": "$12.80"},
+      {"name": "Basmati Rice (5lb)", "price": "$12.65"},
+      {"name": "Fresh Mozzarella (1lb)", "price": "$9.55"},
+      {"name": "Cage-Free Eggs (Dozen)", "price": "$6.15"},
+      {"name": "Honey Granola (2lb)", "price": "$7.25"},
+      {"name": "Kale Bunches", "price": "$4.40"},
+      {"name": "Sliced Turkey Breast (1lb)", "price": "$8.95"},
+      {"name": "Strawberries (2lb)", "price": "$7.25"},
+      {"name": "Coconut Water (6pk)", "price": "$9.65"},
+      {"name": "Rustic Baguettes (2ct)", "price": "$4.85"},
+      {"name": "Parmesan Wedge", "price": "$7.60"}
+    ]
+  },
+  {
+    "supplier": "Metro Chef Supply",
+    "date": "04/04/2025",
+    "items": [
+      {"name": "Baby Spinach", "price": "$5.85"},
+      {"name": "Chicken Breast", "price": "$18.70"},
+      {"name": "Whole Milk (1gal)", "price": "$7.45"},
+      {"name": "Brown Rice (5lb)", "price": "$11.55"},
+      {"name": "Olive Oil (1L)", "price": "$16.70"},
+      {"name": "Greek Yogurt (Large)", "price": "$13.25"},
+      {"name": "Basmati Rice (5lb)", "price": "$13.20"},
+      {"name": "Fresh Mozzarella (1lb)", "price": "$9.95"},
+      {"name": "Cage-Free Eggs (Dozen)", "price": "$6.45"},
+      {"name": "Honey Granola (2lb)", "price": "$7.55"},
+      {"name": "Strawberries (2lb)", "price": "$7.55"},
+      {"name": "Coconut Water (6pk)", "price": "$10.05"},
+      {"name": "Rustic Baguettes (2ct)", "price": "$5.20"},
+      {"name": "Parmesan Wedge", "price": "$8.05"},
+      {"name": "Espresso Beans (2lb)", "price": "$15.40"},
+      {"name": "Mixed Bell Peppers (3ct)", "price": "$4.95"}
+    ]
+  }
+]
