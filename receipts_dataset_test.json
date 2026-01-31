@@ -1,0 +1,707 @@
+[
+  {
+    "supplier": "Valley Fresh Market",
+    "date": "01/31/2025",
+    "items": [
+      {
+        "name": "Roma Tomatoes",
+        "price": "$2.80",
+        "category": "Produce"
+      },
+      {
+        "name": "Baby Spinach",
+        "price": "$3.50",
+        "category": "Produce"
+      },
+      {
+        "name": "Chicken Breast",
+        "price": "$12.00",
+        "category": "Meat"
+      },
+      {
+        "name": "Eggs (Dozen)",
+        "price": "$4.20",
+        "category": "Dairy"
+      },
+      {
+        "name": "Whole Milk (1gal)",
+        "price": "$4.90",
+        "category": "Dairy"
+      },
+      {
+        "name": "Brown Rice (5lb)",
+        "price": "$7.60",
+        "category": "Dry Goods"
+      },
+      {
+        "name": "Olive Oil (1L)",
+        "price": "$11.50",
+        "category": "Dry Goods"
+      },
+      {
+        "name": "Black Beans (Canned)",
+        "price": "$1.60",
+        "category": "Dry Goods"
+      },
+      {
+        "name": "Greek Yogurt (Large)",
+        "price": "$8.90",
+        "category": "Dairy"
+      },
+      {
+        "name": "Sparkling Water (12pk)",
+        "price": "$9.50",
+        "category": "Beverages"
+      }
+    ]
+  },
+  {
+    "supplier": "Valley Fresh Market",
+    "date": "02/07/2025",
+    "items": [
+      {
+        "name": "Roma Tomatoes",
+        "price": "$3.08",
+        "category": "Produce"
+      },
+      {
+        "name": "Baby Spinach",
+        "price": "$3.85",
+        "category": "Produce"
+      },
+      {
+        "name": "Chicken Breast",
+        "price": "$13.20",
+        "category": "Meat"
+      },
+      {
+        "name": "Eggs (Dozen)",
+        "price": "$4.54",
+        "category": "Dairy"
+      },
+      {
+        "name": "Whole Milk (1gal)",
+        "price": "$5.15",
+        "category": "Dairy"
+      },
+      {
+        "name": "Brown Rice (5lb)",
+        "price": "$8.25",
+        "category": "Dry Goods"
+      },
+      {
+        "name": "Olive Oil (1L)",
+        "price": "$12.30",
+        "category": "Dry Goods"
+      },
+      {
+        "name": "Greek Yogurt (Large)",
+        "price": "$9.45",
+        "category": "Dairy"
+      },
+      {
+        "name": "Sparkling Water (12pk)",
+        "price": "$10.25",
+        "category": "Beverages"
+      },
+      {
+        "name": "Avocados (3ct)",
+        "price": "$5.20",
+        "category": "Produce"
+      },
+      {
+        "name": "Ground Beef (2lb)",
+        "price": "$11.80",
+        "category": "Meat"
+      },
+      {
+        "name": "Cheddar Cheese Block",
+        "price": "$6.75",
+        "category": "Dairy"
+      }
+    ]
+  },
+  {
+    "supplier": "Valley Fresh Market",
+    "date": "02/14/2025",
+    "items": [
+      {
+        "name": "Roma Tomatoes",
+        "price": "$3.35",
+        "category": "Produce"
+      },
+      {
+        "name": "Baby Spinach",
+        "price": "$4.05",
+        "category": "Produce"
+      },
+      {
+        "name": "Chicken Breast",
+        "price": "$14.10",
+        "category": "Meat"
+      },
+      {
+        "name": "Eggs (Dozen)",
+        "price": "$4.85",
+        "category": "Dairy"
+      },
+      {
+        "name": "Whole Milk (1gal)",
+        "price": "$5.45",
+        "category": "Dairy"
+      },
+      {
+        "name": "Brown Rice (5lb)",
+        "price": "$8.75",
+        "category": "Dry Goods"
+      },
+      {
+        "name": "Olive Oil (1L)",
+        "price": "$12.85",
+        "category": "Dry Goods"
+      },
+      {
+        "name": "Greek Yogurt (Large)",
+        "price": "$9.95",
+        "category": "Dairy"
+      },
+      {
+        "name": "Avocados (3ct)",
+        "price": "$5.55",
+        "category": "Produce"
+      },
+      {
+        "name": "Cheddar Cheese Block",
+        "price": "$7.10",
+        "category": "Dairy"
+      },
+      {
+        "name": "Old-Fashioned Oats (2lb)",
+        "price": "$4.40",
+        "category": "Dry Goods"
+      },
+      {
+        "name": "Almond Milk (64oz)",
+        "price": "$4.70",
+        "category": "Dairy"
+      }
+    ]
+  },
+  {
+    "supplier": "Harbor Wholesale Foods",
+    "date": "02/21/2025",
+    "items": [
+      {
+        "name": "Roma Tomatoes",
+        "price": "$3.52",
+        "category": "Produce"
+      },
+      {
+        "name": "Baby Spinach",
+        "price": "$4.30",
+        "category": "Produce"
+      },
+      {
+        "name": "Chicken Breast",
+        "price": "$14.95",
+        "category": "Meat"
+      },
+      {
+        "name": "Whole Milk (1gal)",
+        "price": "$5.80",
+        "category": "Dairy"
+      },
+      {
+        "name": "Brown Rice (5lb)",
+        "price": "$9.10",
+        "category": "Dry Goods"
+      },
+      {
+        "name": "Olive Oil (1L)",
+        "price": "$13.35",
+        "category": "Dry Goods"
+      },
+      {
+        "name": "Greek Yogurt (Large)",
+        "price": "$10.45",
+        "category": "Dairy"
+      },
+      {
+        "name": "Avocados (3ct)",
+        "price": "$5.90",
+        "category": "Produce"
+      },
+      {
+        "name": "Old-Fashioned Oats (2lb)",
+        "price": "$4.85",
+        "category": "Dry Goods"
+      },
+      {
+        "name": "Almond Milk (64oz)",
+        "price": "$5.05",
+        "category": "Dairy"
+      },
+      {
+        "name": "Salmon Fillets (2lb)",
+        "price": "$17.80",
+        "category": "Meat"
+      },
+      {
+        "name": "Basmati Rice (5lb)",
+        "price": "$9.85",
+        "category": "Dry Goods"
+      }
+    ]
+  },
+  {
+    "supplier": "Harbor Wholesale Foods",
+    "date": "02/28/2025",
+    "items": [
+      {
+        "name": "Roma Tomatoes",
+        "price": "$3.70",
+        "category": "Produce"
+      },
+      {
+        "name": "Baby Spinach",
+        "price": "$4.55",
+        "category": "Produce"
+      },
+      {
+        "name": "Chicken Breast",
+        "price": "$15.40",
+        "category": "Meat"
+      },
+      {
+        "name": "Whole Milk (1gal)",
+        "price": "$6.05",
+        "category": "Dairy"
+      },
+      {
+        "name": "Brown Rice (5lb)",
+        "price": "$9.50",
+        "category": "Dry Goods"
+      },
+      {
+        "name": "Olive Oil (1L)",
+        "price": "$13.95",
+        "category": "Dry Goods"
+      },
+      {
+        "name": "Greek Yogurt (Large)",
+        "price": "$10.95",
+        "category": "Dairy"
+      },
+      {
+        "name": "Avocados (3ct)",
+        "price": "$6.35",
+        "category": "Produce"
+      },
+      {
+        "name": "Old-Fashioned Oats (2lb)",
+        "price": "$5.25",
+        "category": "Dry Goods"
+      },
+      {
+        "name": "Basmati Rice (5lb)",
+        "price": "$10.45",
+        "category": "Dry Goods"
+      },
+      {
+        "name": "Broccoli Crowns (2lb)",
+        "price": "$4.35",
+        "category": "Produce"
+      },
+      {
+        "name": "Fresh Mozzarella (1lb)",
+        "price": "$7.85",
+        "category": "Dairy"
+      }
+    ]
+  },
+  {
+    "supplier": "Harbor Wholesale Foods",
+    "date": "03/07/2025",
+    "items": [
+      {
+        "name": "Baby Spinach",
+        "price": "$4.90",
+        "category": "Produce"
+      },
+      {
+        "name": "Chicken Breast",
+        "price": "$15.95",
+        "category": "Meat"
+      },
+      {
+        "name": "Whole Milk (1gal)",
+        "price": "$6.35",
+        "category": "Dairy"
+      },
+      {
+        "name": "Brown Rice (5lb)",
+        "price": "$9.95",
+        "category": "Dry Goods"
+      },
+      {
+        "name": "Olive Oil (1L)",
+        "price": "$14.60",
+        "category": "Dry Goods"
+      },
+      {
+        "name": "Greek Yogurt (Large)",
+        "price": "$11.35",
+        "category": "Dairy"
+      },
+      {
+        "name": "Avocados (3ct)",
+        "price": "$6.75",
+        "category": "Produce"
+      },
+      {
+        "name": "Basmati Rice (5lb)",
+        "price": "$10.95",
+        "category": "Dry Goods"
+      },
+      {
+        "name": "Broccoli Crowns (2lb)",
+        "price": "$4.70",
+        "category": "Produce"
+      },
+      {
+        "name": "Fresh Mozzarella (1lb)",
+        "price": "$8.35",
+        "category": "Dairy"
+      },
+      {
+        "name": "Cage-Free Eggs (Dozen)",
+        "price": "$5.35",
+        "category": "Dairy"
+      },
+      {
+        "name": "Honey Granola (2lb)",
+        "price": "$6.20",
+        "category": "Dry Goods"
+      }
+    ]
+  },
+  {
+    "supplier": "Green Valley Provisions",
+    "date": "03/14/2025",
+    "items": [
+      {
+        "name": "Baby Spinach",
+        "price": "$5.10",
+        "category": "Produce"
+      },
+      {
+        "name": "Chicken Breast",
+        "price": "$16.60",
+        "category": "Meat"
+      },
+      {
+        "name": "Whole Milk (1gal)",
+        "price": "$6.60",
+        "category": "Dairy"
+      },
+      {
+        "name": "Brown Rice (5lb)",
+        "price": "$10.35",
+        "category": "Dry Goods"
+      },
+      {
+        "name": "Olive Oil (1L)",
+        "price": "$15.05",
+        "category": "Dry Goods"
+      },
+      {
+        "name": "Greek Yogurt (Large)",
+        "price": "$11.85",
+        "category": "Dairy"
+      },
+      {
+        "name": "Basmati Rice (5lb)",
+        "price": "$11.55",
+        "category": "Dry Goods"
+      },
+      {
+        "name": "Broccoli Crowns (2lb)",
+        "price": "$4.95",
+        "category": "Produce"
+      },
+      {
+        "name": "Fresh Mozzarella (1lb)",
+        "price": "$8.75",
+        "category": "Dairy"
+      },
+      {
+        "name": "Cage-Free Eggs (Dozen)",
+        "price": "$5.60",
+        "category": "Dairy"
+      },
+      {
+        "name": "Honey Granola (2lb)",
+        "price": "$6.55",
+        "category": "Dry Goods"
+      },
+      {
+        "name": "Kale Bunches",
+        "price": "$3.90",
+        "category": "Produce"
+      },
+      {
+        "name": "Sliced Turkey Breast (1lb)",
+        "price": "$7.90",
+        "category": "Meat"
+      }
+    ]
+  },
+  {
+    "supplier": "Green Valley Provisions",
+    "date": "03/21/2025",
+    "items": [
+      {
+        "name": "Baby Spinach",
+        "price": "$5.35",
+        "category": "Produce"
+      },
+      {
+        "name": "Chicken Breast",
+        "price": "$17.25",
+        "category": "Meat"
+      },
+      {
+        "name": "Whole Milk (1gal)",
+        "price": "$6.90",
+        "category": "Dairy"
+      },
+      {
+        "name": "Brown Rice (5lb)",
+        "price": "$10.75",
+        "category": "Dry Goods"
+      },
+      {
+        "name": "Olive Oil (1L)",
+        "price": "$15.55",
+        "category": "Dry Goods"
+      },
+      {
+        "name": "Greek Yogurt (Large)",
+        "price": "$12.35",
+        "category": "Dairy"
+      },
+      {
+        "name": "Basmati Rice (5lb)",
+        "price": "$12.10",
+        "category": "Dry Goods"
+      },
+      {
+        "name": "Fresh Mozzarella (1lb)",
+        "price": "$9.10",
+        "category": "Dairy"
+      },
+      {
+        "name": "Cage-Free Eggs (Dozen)",
+        "price": "$5.90",
+        "category": "Dairy"
+      },
+      {
+        "name": "Honey Granola (2lb)",
+        "price": "$6.95",
+        "category": "Dry Goods"
+      },
+      {
+        "name": "Kale Bunches",
+        "price": "$4.15",
+        "category": "Produce"
+      },
+      {
+        "name": "Sliced Turkey Breast (1lb)",
+        "price": "$8.45",
+        "category": "Meat"
+      },
+      {
+        "name": "Strawberries (2lb)",
+        "price": "$6.80",
+        "category": "Produce"
+      },
+      {
+        "name": "Coconut Water (6pk)",
+        "price": "$9.20",
+        "category": "Beverages"
+      }
+    ]
+  },
+  {
+    "supplier": "Green Valley Provisions",
+    "date": "03/28/2025",
+    "items": [
+      {
+        "name": "Baby Spinach",
+        "price": "$5.60",
+        "category": "Produce"
+      },
+      {
+        "name": "Chicken Breast",
+        "price": "$17.95",
+        "category": "Meat"
+      },
+      {
+        "name": "Whole Milk (1gal)",
+        "price": "$7.15",
+        "category": "Dairy"
+      },
+      {
+        "name": "Brown Rice (5lb)",
+        "price": "$11.15",
+        "category": "Dry Goods"
+      },
+      {
+        "name": "Olive Oil (1L)",
+        "price": "$16.10",
+        "category": "Dry Goods"
+      },
+      {
+        "name": "Greek Yogurt (Large)",
+        "price": "$12.80",
+        "category": "Dairy"
+      },
+      {
+        "name": "Basmati Rice (5lb)",
+        "price": "$12.65",
+        "category": "Dry Goods"
+      },
+      {
+        "name": "Fresh Mozzarella (1lb)",
+        "price": "$9.55",
+        "category": "Dairy"
+      },
+      {
+        "name": "Cage-Free Eggs (Dozen)",
+        "price": "$6.15",
+        "category": "Dairy"
+      },
+      {
+        "name": "Honey Granola (2lb)",
+        "price": "$7.25",
+        "category": "Dry Goods"
+      },
+      {
+        "name": "Kale Bunches",
+        "price": "$4.40",
+        "category": "Produce"
+      },
+      {
+        "name": "Sliced Turkey Breast (1lb)",
+        "price": "$8.95",
+        "category": "Meat"
+      },
+      {
+        "name": "Strawberries (2lb)",
+        "price": "$7.25",
+        "category": "Produce"
+      },
+      {
+        "name": "Coconut Water (6pk)",
+        "price": "$9.65",
+        "category": "Beverages"
+      },
+      {
+        "name": "Rustic Baguettes (2ct)",
+        "price": "$4.85",
+        "category": "Dry Goods"
+      },
+      {
+        "name": "Parmesan Wedge",
+        "price": "$7.60",
+        "category": "Dairy"
+      }
+    ]
+  },
+  {
+    "supplier": "Metro Chef Supply",
+    "date": "04/04/2025",
+    "items": [
+      {
+        "name": "Baby Spinach",
+        "price": "$5.85",
+        "category": "Produce"
+      },
+      {
+        "name": "Chicken Breast",
+        "price": "$18.70",
+        "category": "Meat"
+      },
+      {
+        "name": "Whole Milk (1gal)",
+        "price": "$7.45",
+        "category": "Dairy"
+      },
+      {
+        "name": "Brown Rice (5lb)",
+        "price": "$11.55",
+        "category": "Dry Goods"
+      },
+      {
+        "name": "Olive Oil (1L)",
+        "price": "$16.70",
+        "category": "Dry Goods"
+      },
+      {
+        "name": "Greek Yogurt (Large)",
+        "price": "$13.25",
+        "category": "Dairy"
+      },
+      {
+        "name": "Basmati Rice (5lb)",
+        "price": "$13.20",
+        "category": "Dry Goods"
+      },
+      {
+        "name": "Fresh Mozzarella (1lb)",
+        "price": "$9.95",
+        "category": "Dairy"
+      },
+      {
+        "name": "Cage-Free Eggs (Dozen)",
+        "price": "$6.45",
+        "category": "Dairy"
+      },
+      {
+        "name": "Honey Granola (2lb)",
+        "price": "$7.55",
+        "category": "Dry Goods"
+      },
+      {
+        "name": "Strawberries (2lb)",
+        "price": "$7.55",
+        "category": "Produce"
+      },
+      {
+        "name": "Coconut Water (6pk)",
+        "price": "$10.05",
+        "category": "Beverages"
+      },
+      {
+        "name": "Rustic Baguettes (2ct)",
+        "price": "$5.20",
+        "category": "Dry Goods"
+      },
+      {
+        "name": "Parmesan Wedge",
+        "price": "$8.05",
+        "category": "Dairy"
+      },
+      {
+        "name": "Espresso Beans (2lb)",
+        "price": "$15.40",
+        "category": "Dry Goods"
+      },
+      {
+        "name": "Mixed Bell Peppers (3ct)",
+        "price": "$4.95",
+        "category": "Produce"
+      }
+    ]
+  }
+]
