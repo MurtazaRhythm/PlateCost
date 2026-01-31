@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 import easyocr
 import sys
+import re
 
 def preprocess_receipt(img_path):
     img = cv2.imread(img_path)
@@ -25,10 +26,17 @@ def preprocess_receipt(img_path):
     return cv2.morphologyEx(thresh, cv2.MORPH_CLOSE, kernel)
 
 def run_ocr(img_path):
-    reader = easyocr.Reader(['en'], gpu=False)  # Initialize EasyOCR reader
+    reader = easyocr.Reader(['en'], gpu=True)  # Initialize EasyOCR reader
     img = preprocess_receipt(img_path)  # Preprocess the image
     result = reader.readtext(img)  # Run OCR on the preprocessed image
-    return [text for (_, text, _) in result]  # Return the text from the OCR result
+    fixed = []
+    for (_, text, _) in result:
+        # EasyOCR often reads '$' as 'S'; fix common money patterns like "S12.50"
+        text = re.sub(r'\bS(?=\s?\d)', '$', text)
+        # Normalize price formatting that may use a comma instead of a decimal, e.g., "$7,50" -> "$7.50"
+        text = re.sub(r'(\$\d+),(\d{2}\b)', r'\1.\2', text)
+        fixed.append(text)
+    return fixed  # Return the text from the OCR result
     
 
 if __name__ == "__main__":
