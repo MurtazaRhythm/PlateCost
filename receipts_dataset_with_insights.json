@@ -1000,382 +1000,438 @@
       "category": "Produce",
       "change_pct": 92.54,
       "change_absolute": 5.83,
-      "week": "2025-W06"
+      "week": "2025-W06",
+      "ai_sentence": "Produce spending increased 92.54% this week vs last week."
     },
     {
       "type": "spike_unusual",
       "category": "Produce",
       "change_pct": 92.54,
       "change_absolute": 5.83,
-      "week": "2025-W06"
+      "week": "2025-W06",
+      "ai_sentence": "Produce spending increased 92.54% this week vs last week."
     },
     {
       "type": "category_increase",
       "category": "Meat",
       "change_pct": 108.33,
       "change_absolute": 13.0,
-      "week": "2025-W06"
+      "week": "2025-W06",
+      "ai_sentence": "Meat spending increased 108.33% this week vs last week."
     },
     {
       "type": "spike_unusual",
       "category": "Meat",
       "change_pct": 108.33,
       "change_absolute": 13.0,
-      "week": "2025-W06"
+      "week": "2025-W06",
+      "ai_sentence": "Meat spending increased 108.33% this week vs last week."
     },
     {
       "type": "category_increase",
       "category": "Dairy",
       "change_pct": 43.83,
       "change_absolute": 7.89,
-      "week": "2025-W06"
+      "week": "2025-W06",
+      "ai_sentence": "Dairy spending increased 43.83% this week vs last week."
     },
     {
       "type": "category_decrease",
       "category": "Dry Goods",
       "change_pct": -0.72,
       "change_absolute": -0.15,
-      "week": "2025-W06"
+      "week": "2025-W06",
+      "ai_sentence": "Dry Goods spending decreased -0.72% this week vs last week."
     },
     {
       "type": "category_increase",
       "category": "Beverages",
       "change_pct": 7.89,
       "change_absolute": 0.75,
-      "week": "2025-W06"
+      "week": "2025-W06",
+      "ai_sentence": "Beverages spending increased 7.89% this week vs last week."
     },
     {
       "type": "category_increase",
       "category": "Produce",
       "change_pct": 6.76,
       "change_absolute": 0.82,
-      "week": "2025-W07"
+      "week": "2025-W07",
+      "ai_sentence": "Produce spending increased 6.76% this week vs last week."
     },
     {
       "type": "category_decrease",
       "category": "Meat",
       "change_pct": -43.6,
       "change_absolute": -10.9,
-      "week": "2025-W07"
+      "week": "2025-W07",
+      "ai_sentence": "Meat spending decreased -43.6% this week vs last week."
     },
     {
       "type": "category_increase",
       "category": "Dairy",
       "change_pct": 23.79,
       "change_absolute": 6.16,
-      "week": "2025-W07"
+      "week": "2025-W07",
+      "ai_sentence": "Dairy spending increased 23.79% this week vs last week."
     },
     {
       "type": "category_increase",
       "category": "Dry Goods",
       "change_pct": 26.52,
       "change_absolute": 5.45,
-      "week": "2025-W07"
+      "week": "2025-W07",
+      "ai_sentence": "Dry Goods spending increased 26.52% this week vs last week."
     },
     {
       "type": "category_increase",
       "category": "Produce",
       "change_pct": 5.95,
       "change_absolute": 0.77,
-      "week": "2025-W08"
+      "week": "2025-W08",
+      "ai_sentence": "Produce spending increased 5.95% this week vs last week."
     },
     {
       "type": "category_increase",
       "category": "Meat",
       "change_pct": 132.27,
       "change_absolute": 18.65,
-      "week": "2025-W08"
+      "week": "2025-W08",
+      "ai_sentence": "Meat spending increased 132.27% this week vs last week."
     },
     {
       "type": "spike_unusual",
       "category": "Meat",
       "change_pct": 132.27,
       "change_absolute": 18.65,
-      "week": "2025-W08"
+      "week": "2025-W08",
+      "ai_sentence": "Meat spending increased 132.27% this week vs last week."
     },
     {
       "type": "category_decrease",
       "category": "Dairy",
       "change_pct": -33.54,
       "change_absolute": -10.75,
-      "week": "2025-W08"
+      "week": "2025-W08",
+      "ai_sentence": "Dairy spending decreased -33.54% this week vs last week."
     },
     {
       "type": "category_increase",
       "category": "Dry Goods",
       "change_pct": 42.88,
       "change_absolute": 11.15,
-      "week": "2025-W08"
+      "week": "2025-W08",
+      "ai_sentence": "Dry Goods spending increased 42.88% this week vs last week."
     },
     {
       "type": "category_increase",
       "category": "Produce",
       "change_pct": 38.12,
       "change_absolute": 5.23,
-      "week": "2025-W09"
+      "week": "2025-W09",
+      "ai_sentence": "Produce spending increased 38.12% this week vs last week."
     },
     {
       "type": "category_decrease",
       "category": "Meat",
       "change_pct": -52.98,
       "change_absolute": -17.35,
-      "week": "2025-W09"
+      "week": "2025-W09",
+      "ai_sentence": "Meat spending decreased -52.98% this week vs last week."
     },
     {
       "type": "spike_unusual",
       "category": "Meat",
       "change_pct": -52.98,
       "change_absolute": -17.35,
-      "week": "2025-W09"
+      "week": "2025-W09",
+      "ai_sentence": "Meat spending decreased -52.98% this week vs last week."
     },
     {
       "type": "category_increase",
       "category": "Dairy",
       "change_pct": 16.67,
       "change_absolute": 3.55,
-      "week": "2025-W09"
+      "week": "2025-W09",
+      "ai_sentence": "Dairy spending increased 16.67% this week vs last week."
     },
     {
       "type": "category_increase",
       "category": "Dry Goods",
       "change_pct": 5.38,
       "change_absolute": 2.0,
-      "week": "2025-W09"
+      "week": "2025-W09",
+      "ai_sentence": "Dry Goods spending increased 5.38% this week vs last week."
     },
     {
       "type": "category_decrease",
       "category": "Produce",
       "change_pct": -13.72,
       "change_absolute": -2.6,
-      "week": "2025-W10"
+      "week": "2025-W10",
+      "ai_sentence": "Produce spending decreased -13.72% this week vs last week."
     },
     {
       "type": "category_increase",
       "category": "Meat",
       "change_pct": 3.57,
       "change_absolute": 0.55,
-      "week": "2025-W10"
+      "week": "2025-W10",
+      "ai_sentence": "Meat spending increased 3.57% this week vs last week."
     },
     {
       "type": "category_increase",
       "category": "Dairy",
       "change_pct": 26.36,
       "change_absolute": 6.55,
-      "week": "2025-W10"
+      "week": "2025-W10",
+      "ai_sentence": "Dairy spending increased 26.36% this week vs last week."
     },
     {
       "type": "category_increase",
       "category": "Dry Goods",
       "change_pct": 6.51,
       "change_absolute": 2.55,
-      "week": "2025-W10"
+      "week": "2025-W10",
+      "ai_sentence": "Dry Goods spending increased 6.51% this week vs last week."
     },
     {
       "type": "category_decrease",
       "category": "Produce",
       "change_pct": -14.68,
       "change_absolute": -2.4,
-      "week": "2025-W11"
+      "week": "2025-W11",
+      "ai_sentence": "Produce spending decreased -14.68% this week vs last week."
     },
     {
       "type": "category_increase",
       "category": "Meat",
       "change_pct": 53.61,
       "change_absolute": 8.55,
-      "week": "2025-W11"
+      "week": "2025-W11",
+      "ai_sentence": "Meat spending increased 53.61% this week vs last week."
     },
     {
       "type": "spike_unusual",
       "category": "Meat",
       "change_pct": 53.61,
       "change_absolute": 8.55,
-      "week": "2025-W11"
+      "week": "2025-W11",
+      "ai_sentence": "Meat spending increased 53.61% this week vs last week."
     },
     {
       "type": "category_increase",
       "category": "Dairy",
       "change_pct": 4.46,
       "change_absolute": 1.4,
-      "week": "2025-W11"
+      "week": "2025-W11",
+      "ai_sentence": "Dairy spending increased 4.46% this week vs last week."
     },
     {
       "type": "category_increase",
       "category": "Dry Goods",
       "change_pct": 4.32,
       "change_absolute": 1.8,
-      "week": "2025-W11"
+      "week": "2025-W11",
+      "ai_sentence": "Dry Goods spending increased 4.32% this week vs last week."
     },
     {
       "type": "category_increase",
       "category": "Produce",
       "change_pct": 16.85,
       "change_absolute": 2.35,
-      "week": "2025-W12"
+      "week": "2025-W12",
+      "ai_sentence": "Produce spending increased 16.85% this week vs last week."
     },
     {
       "type": "category_increase",
       "category": "Meat",
       "change_pct": 4.9,
       "change_absolute": 1.2,
-      "week": "2025-W12"
+      "week": "2025-W12",
+      "ai_sentence": "Meat spending increased 4.9% this week vs last week."
     },
     {
       "type": "category_increase",
       "category": "Dairy",
       "change_pct": 4.42,
       "change_absolute": 1.45,
-      "week": "2025-W12"
+      "week": "2025-W12",
+      "ai_sentence": "Dairy spending increased 4.42% this week vs last week."
     },
     {
       "type": "category_increase",
       "category": "Dry Goods",
       "change_pct": 4.25,
       "change_absolute": 1.85,
-      "week": "2025-W12"
+      "week": "2025-W12",
+      "ai_sentence": "Dry Goods spending increased 4.25% this week vs last week."
     },
     {
       "type": "category_increase",
       "category": "Beverages",
       "change_pct": 100.0,
       "change_absolute": 9.2,
-      "week": "2025-W12"
+      "week": "2025-W12",
+      "ai_sentence": "Beverages spending increased 100.0% this week vs last week."
     },
     {
       "type": "spike_unusual",
       "category": "Beverages",
       "change_pct": 100.0,
       "change_absolute": 9.2,
-      "week": "2025-W12"
+      "week": "2025-W12",
+      "ai_sentence": "Beverages spending increased 100.0% this week vs last week."
     },
     {
       "type": "category_increase",
       "category": "Produce",
       "change_pct": 5.83,
       "change_absolute": 0.95,
-      "week": "2025-W13"
+      "week": "2025-W13",
+      "ai_sentence": "Produce spending increased 5.83% this week vs last week."
     },
     {
       "type": "category_increase",
       "category": "Meat",
       "change_pct": 4.67,
       "change_absolute": 1.2,
-      "week": "2025-W13"
+      "week": "2025-W13",
+      "ai_sentence": "Meat spending increased 4.67% this week vs last week."
     },
     {
       "type": "category_increase",
       "category": "Dairy",
       "change_pct": 26.28,
       "change_absolute": 9.0,
-      "week": "2025-W13"
+      "week": "2025-W13",
+      "ai_sentence": "Dairy spending increased 26.28% this week vs last week."
     },
     {
       "type": "category_increase",
       "category": "Dry Goods",
       "change_pct": 14.66,
       "change_absolute": 6.65,
-      "week": "2025-W13"
+      "week": "2025-W13",
+      "ai_sentence": "Dry Goods spending increased 14.66% this week vs last week."
     },
     {
       "type": "category_increase",
       "category": "Beverages",
       "change_pct": 4.89,
       "change_absolute": 0.45,
-      "week": "2025-W13"
+      "week": "2025-W13",
+      "ai_sentence": "Beverages spending increased 4.89% this week vs last week."
     },
     {
       "type": "category_increase",
       "category": "Produce",
       "change_pct": 6.38,
       "change_absolute": 1.1,
-      "week": "2025-W14"
+      "week": "2025-W14",
+      "ai_sentence": "Produce spending increased 6.38% this week vs last week."
     },
     {
       "type": "category_decrease",
       "category": "Meat",
       "change_pct": -30.48,
       "change_absolute": -8.2,
-      "week": "2025-W14"
+      "week": "2025-W14",
+      "ai_sentence": "Meat spending decreased -30.48% this week vs last week."
     },
     {
       "type": "category_increase",
       "category": "Dairy",
       "change_pct": 4.39,
       "change_absolute": 1.9,
-      "week": "2025-W14"
+      "week": "2025-W14",
+      "ai_sentence": "Dairy spending increased 4.39% this week vs last week."
     },
     {
       "type": "category_increase",
       "category": "Dry Goods",
       "change_pct": 33.85,
       "change_absolute": 17.6,
-      "week": "2025-W14"
+      "week": "2025-W14",
+      "ai_sentence": "Dry Goods spending increased 33.85% this week vs last week."
     },
     {
       "type": "category_increase",
       "category": "Beverages",
       "change_pct": 4.15,
       "change_absolute": 0.4,
-      "week": "2025-W14"
+      "week": "2025-W14",
+      "ai_sentence": "Beverages spending increased 4.15% this week vs last week."
     },
     {
       "type": "supplier_concentration",
       "supplier": "Valley Fresh Market",
       "share": 100.0,
-      "week": "2025-W05"
+      "week": "2025-W05",
+      "ai_sentence": "Supplier Valley Fresh Market accounts for 100.0% of spend this week."
     },
     {
       "type": "supplier_concentration",
       "supplier": "Valley Fresh Market",
       "share": 100.0,
-      "week": "2025-W06"
+      "week": "2025-W06",
+      "ai_sentence": "Supplier Valley Fresh Market accounts for 100.0% of spend this week."
     },
     {
       "type": "supplier_concentration",
       "supplier": "Valley Fresh Market",
       "share": 100.0,
-      "week": "2025-W07"
+      "week": "2025-W07",
+      "ai_sentence": "Supplier Valley Fresh Market accounts for 100.0% of spend this week."
     },
     {
       "type": "supplier_concentration",
       "supplier": "Harbor Wholesale Foods",
       "share": 100.0,
-      "week": "2025-W08"
+      "week": "2025-W08",
+      "ai_sentence": "Supplier Harbor Wholesale Foods accounts for 100.0% of spend this week."
     },
     {
       "type": "supplier_concentration",
       "supplier": "Harbor Wholesale Foods",
       "share": 100.0,
-      "week": "2025-W09"
+      "week": "2025-W09",
+      "ai_sentence": "Supplier Harbor Wholesale Foods accounts for 100.0% of spend this week."
     },
     {
       "type": "supplier_concentration",
       "supplier": "Harbor Wholesale Foods",
       "share": 100.0,
-      "week": "2025-W10"
+      "week": "2025-W10",
+      "ai_sentence": "Supplier Harbor Wholesale Foods accounts for 100.0% of spend this week."
     },
     {
       "type": "supplier_concentration",
       "supplier": "Green Valley Provisions",
       "share": 100.0,
-      "week": "2025-W11"
+      "week": "2025-W11",
+      "ai_sentence": "Supplier Green Valley Provisions accounts for 100.0% of spend this week."
     },
     {
       "type": "supplier_concentration",
       "supplier": "Green Valley Provisions",
       "share": 100.0,
-      "week": "2025-W12"
+      "week": "2025-W12",
+      "ai_sentence": "Supplier Green Valley Provisions accounts for 100.0% of spend this week."
     },
     {
       "type": "supplier_concentration",
       "supplier": "Green Valley Provisions",
       "share": 100.0,
-      "week": "2025-W13"
+      "week": "2025-W13",
+      "ai_sentence": "Supplier Green Valley Provisions accounts for 100.0% of spend this week."
     },
     {
       "type": "supplier_concentration",
       "supplier": "Metro Chef Supply",
       "share": 100.0,
-      "week": "2025-W14"
+      "week": "2025-W14",
+      "ai_sentence": "Supplier Metro Chef Supply accounts for 100.0% of spend this week."
     }
   ]
 }

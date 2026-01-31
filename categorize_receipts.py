@@ -1,6 +1,7 @@
 import json
 import sys
 import re
+from datetime import datetime
 from pathlib import Path
 from typing import List, Dict, Any, Optional
 
@@ -232,7 +233,16 @@ def categorize_items(receipts: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
                 cat = llm_cat or "Other"
             else:
                 cat = prelim_cats[idx] or "Other"
-            new_items.append({"name": item.get("name", ""), "price": item.get("price", ""), "category": cat})
+            price_raw = item.get("price", "")
+            price_float = parse_price(price_raw)
+            new_items.append(
+                {
+                    "name": item.get("name", ""),
+                    "price": price_raw,
+                    "price_float": price_float,
+                    "category": cat,
+                }
+            )
         categorized.append(
             {
                 "supplier": receipt.get("supplier", ""),
@@ -243,13 +253,144 @@ def categorize_items(receipts: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     return categorized
 
 
+def parse_price(price: Any) -> float:
+    if isinstance(price, (int, float)):
+        return float(price)
+    if not isinstance(price, str):
+        return 0.0
+    cleaned = price.replace("$", "").replace(",", "").strip()
+    try:
+        return float(cleaned)
+    except Exception:
+        return 0.0
+
+
+def week_key(date_str: str) -> str:
+    try:
+        dt = datetime.strptime(date_str, "%m/%d/%Y")
+        iso_year, iso_week, _ = dt.isocalendar()
+        return f"{iso_year}-W{iso_week:02d}"
+    except Exception:
+        return "unknown"
+
+
+def aggregate_weekly(receipts: List[Dict[str, Any]]):
+    weekly_category: Dict[str, Dict[str, float]] = {}
+    weekly_supplier: Dict[str, Dict[str, float]] = {}
+    week_totals: Dict[str, float] = {}
+
+    for receipt in receipts:
+        wk = week_key(receipt.get("date", ""))
+        weekly_category.setdefault(wk, {})
+        weekly_supplier.setdefault(wk, {})
+
+        supplier = receipt.get("supplier", "unknown")
+        for item in receipt.get("items", []):
+            cat = item.get("category", "Other")
+            amt = item.get("price_float", 0.0)
+            weekly_category[wk][cat] = weekly_category[wk].get(cat, 0.0) + amt
+            weekly_supplier[wk][supplier] = weekly_supplier[wk].get(supplier, 0.0) + amt
+            week_totals[wk] = week_totals.get(wk, 0.0) + amt
+
+    return weekly_category, weekly_supplier, week_totals
+
+
+def compute_insights(weekly_category, weekly_supplier, week_totals):
+    insights = []
+    weeks_sorted = sorted(weekly_category.keys())
+
+    # Category week-over-week
+    for idx, wk in enumerate(weeks_sorted):
+        if idx == 0:
+            continue
+        prev = weeks_sorted[idx - 1]
+        for cat, val in weekly_category[wk].items():
+            prev_val = weekly_category.get(prev, {}).get(cat, 0.0)
+            delta = val - prev_val
+            if prev_val == 0:
+                change_pct = 100.0 if val > 0 else 0.0
+            else:
+                change_pct = (delta / prev_val) * 100.0
+            if delta > 0:
+                insights.append(
+                    {
+                        "type": "category_increase",
+                        "category": cat,
+                        "change_pct": round(change_pct, 2),
+                        "change_absolute": round(delta, 2),
+                        "week": wk,
+                    }
+                )
+            elif delta < 0:
+                insights.append(
+                    {
+                        "type": "category_decrease",
+                        "category": cat,
+                        "change_pct": round(change_pct, 2),
+                        "change_absolute": round(delta, 2),
+                        "week": wk,
+                    }
+                )
+            if abs(change_pct) >= 50.0:
+                insights.append(
+                    {
+                        "type": "spike_unusual",
+                        "category": cat,
+                        "change_pct": round(change_pct, 2),
+                        "change_absolute": round(delta, 2),
+                        "week": wk,
+                    }
+                )
+
+    # Supplier concentration per week
+    for wk, suppliers in weekly_supplier.items():
+        total = week_totals.get(wk, 0.0)
+        if total <= 0:
+            continue
+        for supplier, amt in suppliers.items():
+            share = amt / total
+            if share > 0.5:
+                insights.append(
+                    {
+                        "type": "supplier_concentration",
+                        "supplier": supplier,
+                        "share": round(share * 100, 2),
+                        "week": wk,
+                    }
+                )
+
+    return insights
+
+
+def build_output(receipts: List[Dict[str, Any]]) -> Dict[str, Any]:
+    weekly_category, weekly_supplier, week_totals = aggregate_weekly(receipts)
+    insights = compute_insights(weekly_category, weekly_supplier, week_totals)
+
+    weekly_category_list = [
+        {"week": wk, "categories": {k: round(v, 2) for k, v in cats.items()}}
+        for wk, cats in weekly_category.items()
+    ]
+    weekly_supplier_list = [
+        {"week": wk, "suppliers": {k: round(v, 2) for k, v in sups.items()}}
+        for wk, sups in weekly_supplier.items()
+    ]
+
+    return {
+        "receipts": receipts,
+        "weekly_category": weekly_category_list,
+        "weekly_supplier": weekly_supplier_list,
+        "insights": insights,
+    }
+
+
 def main():
     src = sys.argv[1] if len(sys.argv) > 1 else "receipts_dataset.json"
     dest = sys.argv[2] if len(sys.argv) > 2 else "receipts_dataset_test.json"
 
     receipts = load_receipts(src)
     categorized = categorize_items(receipts)
-    save_receipts(categorized, dest)
+    output = build_output(categorized)
+    save_receipts(output, dest)
     print(f"Saved categorized receipts to {Path(dest).resolve()}")
 
 
