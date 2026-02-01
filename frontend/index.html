@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Receipt Upload & Management</title>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 24px; background: #f7f7f7; }
+    .container { max-width: 960px; margin: 0 auto; }
+    h1 { margin-bottom: 16px; }
+    .card { background: #fff; padding: 16px; margin-bottom: 12px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center; }
+    .card-actions button { margin-left: 8px; }
+    .panel { background: #fff; padding: 16px; margin-top: 16px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+    .row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+    .error { color: #b00020; margin-top: 8px; }
+    .success { color: #0b7a0b; margin-top: 8px; }
+    ul { padding-left: 18px; }
+    button { cursor: pointer; }
+    .small { color: #666; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/javascript">
+    const { useState, useEffect } = React;
+
+    const ALLOWED_TYPES = ["image/png", "image/jpeg", "text/plain"];
+    const OCR_JSON_PATH = "/receipts_ocr.json";
+
+    function formatDate(ts) {
+      try { return new Date(ts).toLocaleString(); } catch { return ts; }
+    }
+
+    async function fetchOCRData() {
+      try {
+        const res = await fetch(OCR_JSON_PATH, { cache: "no-cache" });
+        if (!res.ok) throw new Error("Failed OCR fetch");
+        return await res.json();
+      } catch {
+        return [];
+      }
+    }
+
+    function App() {
+      const [file, setFile] = useState(null);
+      const [receipts, setReceipts] = useState([]);
+      const [selected, setSelected] = useState(null);
+      const [parsed, setParsed] = useState(null);
+      const [message, setMessage] = useState("");
+      const [error, setError] = useState("");
+
+      useEffect(() => {
+        // Initial load from backend list if available
+        (async () => {
+          try {
+            const res = await fetch("/receipts", { cache: "no-cache" });
+            if (res.ok) {
+              const data = await res.json();
+              setReceipts(Array.isArray(data) ? data : []);
+            }
+          } catch {
+            // silently ignore; start empty
+          }
+        })();
+      }, []);
+
+      const onFileChange = (e) => {
+        const f = e.target.files[0];
+        if (!f) return;
+        if (!ALLOWED_TYPES.includes(f.type)) {
+          setError("Unsupported file type. Allowed: png, jpg, jpeg, txt.");
+          setMessage("");
+          setFile(null);
+          return;
+        }
+        setFile(f);
+        setError("");
+      };
+
+      const upload = async () => {
+        if (!file) {
+          setError("Please select a file first.");
+          return;
+        }
+        setError("");
+        setMessage("Uploading...");
+        const form = new FormData();
+        form.append("file", file);
+        try {
+          const res = await fetch("/upload", { method: "POST", body: form });
+          if (!res.ok) throw new Error("Upload failed");
+          const data = await res.json();
+          const receipt = {
+            id: data.id || crypto.randomUUID(),
+            filename: data.filename || file.name,
+            uploaded_at: data.uploaded_at || new Date().toISOString(),
+          };
+          setReceipts((prev) => [receipt, ...prev]);
+          setMessage("Upload succeeded.");
+        } catch (err) {
+          setError("Upload failed. Please try again.");
+          setMessage("");
+        }
+      };
+
+      const deleteReceipt = async (id) => {
+        try {
+          const res = await fetch(`/receipts/${encodeURIComponent(id)}`, { method: "DELETE" });
+          if (!res.ok) throw new Error("Delete failed");
+          setReceipts((prev) => prev.filter((r) => r.id !== id));
+          if (selected && selected.id === id) {
+            setSelected(null);
+            setParsed(null);
+          }
+        } catch {
+          setError("Delete failed. Please try again.");
+        }
+      };
+
+      const viewReceipt = async (receipt) => {
+        setSelected(receipt);
+        const ocr = await fetchOCRData();
+        const match = (ocr || []).find(
+          (r) => r.filename === receipt.filename || r.id === receipt.id
+        );
+        setParsed(match || null);
+      };
+
+      return (
+        <div className="container">
+          <h1>Receipt Upload</h1>
+          <div className="card">
+            <div className="row">
+              <input type="file" accept=".png,.jpg,.jpeg,.txt" onChange={onFileChange} />
+              <button onClick={upload}>Upload Receipt</button>
+            </div>
+            <div className="small">Allowed: png, jpg, jpeg, txt</div>
+          </div>
+          {error && <div className="error">{error}</div>}
+          {message && <div className="success">{message}</div>}
+
+          <h2>Uploaded Receipts</h2>
+          {receipts.length === 0 && <div className="small">No receipts uploaded yet.</div>}
+          {receipts.map((r) => (
+            <div key={r.id} className="card">
+              <div>
+                <div className="small">{r.filename}</div>
+                <div className="small">Uploaded: {formatDate(r.uploaded_at)}</div>
+              </div>
+              <div className="card-actions">
+                <button onClick={() => viewReceipt(r)}>View Receipt</button>
+                <button onClick={() => deleteReceipt(r.id)}>Delete Receipt</button>
+              </div>
+            </div>
+          ))}
+
+          {selected && (
+            <div className="panel">
+              <div className="row" style={{ justifyContent: "space-between" }}>
+                <h3>Parsed Receipt Info</h3>
+                <button onClick={() => { setSelected(null); setParsed(null); }}>Close</button>
+              </div>
+              {parsed ? (
+                <>
+                  <div><strong>Supplier:</strong> {parsed.supplier || "N/A"}</div>
+                  <div><strong>Date:</strong> {parsed.date || "N/A"}</div>
+                  <div style={{ marginTop: "8px" }}><strong>Items:</strong></div>
+                  <ul>
+                    {parsed.items && parsed.items.length > 0 ? (
+                      parsed.items.map((it, idx) => (
+                        <li key={idx}>
+                          {it.name} — {it.price} {it.category ? `(${it.category})` : ""}
+                        </li>
+                      ))
+                    ) : (
+                      <li>No items found for this receipt.</li>
+                    )}
+                  </ul>
+                </>
+              ) : (
+                <div className="small">No parsed data available for this receipt.</div>
+              )}
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
+</body>
+</html>

@@ -139,7 +139,7 @@ def llm_sentences(gen, insights: List[Dict[str, Any]]) -> List[str]:
 
 
 def main():
-    src = sys.argv[1] if len(sys.argv) > 1 else "receipts_dataset_test.json"
+    src = sys.argv[1] if len(sys.argv) > 1 else "receipts_dataset_categorized.json"
     dest = sys.argv[2] if len(sys.argv) > 2 else "receipts_dataset_with_insights.json"
 
     data = load_json(src)
