@@ -14,4 +14,4 @@ Were gonna have test receipt txt files and a receipt image that both can be used
 
 Many functions might not have the ai comment over it however we both have line suggestions activated for more of a syntax or text parsing aspect then a logic one.
 
-The biggest next step for this app is making a clean frontend for it but for the hackathon functionality was the priority.
+A big part of the aesthetics of the frontend were prompted because its purely visual and doesn't have much importance with our project concept.
