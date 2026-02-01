@@ -69,7 +69,7 @@ def _prompt_for_batch(batch: List[Dict[str, Any]]) -> str:
         "... continue for all insights."
     )
 
-
+#AI assisted with this function
 def _fallback_sentence(ins: Dict[str, Any]) -> str:
     itype = ins.get("type", "")
     category = ins.get("category", "")
@@ -105,13 +105,13 @@ def _parse_lines(text: str, count: int) -> List[Optional[str]]:
                 continue
             if 0 <= idx < count:
                 results[idx] = rest.strip()
-    # If lines came back without numbering, try positional mapping
+    # If lines came back without numbering, try positional mapping, AI assisted with this section
     if all(r is None for r in results):
         for i, ln in enumerate(lines[:count]):
             results[i] = ln
     return results
 
-
+#AI assisted with this function
 # Generate one sentence per insight; fall back to deterministic templates when LLM output is missing.
 def llm_sentences(gen, insights: List[Dict[str, Any]]) -> List[str]:
     sentences: List[str] = []

@@ -298,7 +298,7 @@ def aggregate_weekly(receipts: List[Dict[str, Any]]):
 
     return weekly_category, weekly_supplier, week_totals
 
-
+#AI assisted with this function
 # Derive simple insights (WoW change, spikes, supplier concentration).
 def compute_insights(weekly_category, weekly_supplier, week_totals):
     insights = []

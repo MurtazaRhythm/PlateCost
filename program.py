@@ -50,7 +50,7 @@ def run_ocr(img_path):
         fixed.append(text)
     return fixed  # Return the text from the OCR result
 
-#AI helped with this function
+#AI assisted with this function
 # Parse OCR lines into supplier, date, and items with prices.
 def parse_receipt(lines):
     price_re = re.compile(r'\$\s?\d+(?:[.,]\d{2})?')
@@ -126,7 +126,7 @@ def parse_receipt(lines):
 
     return {"supplier": supplier, "date": date, "items": items}
 
-
+#AI assisted with this function
 # Save a single parsed receipt and merge it into a dataset file (deduping).
 def save_receipt_json(data, dataset_path="receipts_dataset.json", compact=False):
     """

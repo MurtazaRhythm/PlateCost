@@ -1,3 +1,4 @@
+#AI assisted with this file
 # FastAPI backend that handles receipt uploads, OCR, categorization, and serves the frontend.
 import json
 import uuid
