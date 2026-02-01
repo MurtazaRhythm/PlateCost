@@ -384,8 +384,8 @@ def build_output(receipts: List[Dict[str, Any]]) -> Dict[str, Any]:
 
 
 def main():
-    src = sys.argv[1] if len(sys.argv) > 1 else "synthetic_receipts.json"
-    dest = sys.argv[2] if len(sys.argv) > 2 else "receipts_dataset_categorized.json"
+    src = sys.argv[1] if len(sys.argv) > 1 else "data/receipts_ocr.json"
+    dest = sys.argv[2] if len(sys.argv) > 2 else "data/receipts_dataset_categorized.json"
 
     receipts = load_receipts(src)
     categorized = categorize_items(receipts)

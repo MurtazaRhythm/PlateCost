@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Receipt Spend by Category</title>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 24px; background: #f7f7f7; }
+    .container { max-width: 960px; margin: 0 auto; }
+    h1 { margin-bottom: 8px; }
+    .card { background: #fff; padding: 16px; margin-top: 16px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+    .small { color: #666; font-size: 13px; }
+    .status { margin-top: 12px; }
+    canvas { max-width: 600px; width: 100%; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <div style="position: fixed; top: 12px; right: 12px;">
+    <a href="./index.html">Back to Uploads</a>
+  </div>
+  <script type="text/babel">
+    const { useEffect, useState, useRef } = React;
+
+    // Prefer categorized data first (includes categories); fall back to raw OCR.
+    const PREFERRED_URLS = [
+      "/receipts_dataset_categorized.json",
+      "/receipts_ocr.json"
+    ];
+
+    function parsePriceToFloat(val) {
+      if (val === null || val === undefined) return 0;
+      if (typeof val === "number") return val;
+      if (typeof val !== "string") return 0;
+      const cleaned = val.replace(/[$,]/g, "").trim();
+      const num = parseFloat(cleaned);
+      return isNaN(num) ? 0 : num;
+    }
+
+    function aggregateByCategory(data) {
+      const totals = {};
+      if (!Array.isArray(data)) return totals;
+      data.forEach((receipt) => {
+        (receipt.items || []).forEach((item) => {
+          const cat = item.category || "Uncategorized";
+          const amt = item.price_float !== undefined ? item.price_float : parsePriceToFloat(item.price);
+          totals[cat] = (totals[cat] || 0) + (amt || 0);
+        });
+      });
+      return totals;
+    }
+
+    async function fetchFirstAvailable(urls) {
+      for (const url of urls) {
+        try {
+          const res = await fetch(url, { cache: "no-cache" });
+          if (!res.ok) continue;
+          const json = await res.json();
+          // receipts_ocr.json is likely an array; receipts_dataset_categorized.json is likely an array or object
+          if (Array.isArray(json)) return json;
+          if (json && Array.isArray(json.receipts)) return json.receipts;
+        } catch (e) {
+          // try next
+        }
+      }
+      throw new Error("No data available");
+    }
+
+    function ChartCard() {
+      const [loading, setLoading] = useState(true);
+      const [error, setError] = useState("");
+      const [totals, setTotals] = useState({});
+      const [rawData, setRawData] = useState([]);
+      const [selectedCategory, setSelectedCategory] = useState(null);
+      const canvasRef = useRef(null);
+      const chartRef = useRef(null);
+
+      const loadData = async () => {
+        try {
+          const data = await fetchFirstAvailable(PREFERRED_URLS);
+          setRawData(Array.isArray(data) ? data : []);
+          const agg = aggregateByCategory(data);
+          setTotals(agg);
+          setError("");
+        } catch (err) {
+          setError("Unable to load data. Please ensure the backend JSON is served.");
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      const parsePriceToFloatSafe = (val) => {
+        if (val === null || val === undefined) return 0;
+        if (typeof val === "number") return val;
+        if (typeof val !== "string") return 0;
+        const cleaned = val.replace(/[$,]/g, "").trim();
+        const num = parseFloat(cleaned);
+        return isNaN(num) ? 0 : num;
+      };
+
+      const isoWeekKey = (dateStr) => {
+        if (!dateStr) return null;
+        const parts = dateStr.split(/[/-]/);
+        if (parts.length !== 3) return null;
+        const [m, d, y] = parts.map((p) => parseInt(p, 10));
+        if (isNaN(m) || isNaN(d) || isNaN(y)) return null;
+        const dt = new Date(y, m - 1, d);
+        if (isNaN(dt.getTime())) return null;
+        const tmp = new Date(Date.UTC(dt.getFullYear(), dt.getMonth(), dt.getDate()));
+        // ISO week calculation
+        const dayNum = tmp.getUTCDay() || 7;
+        tmp.setUTCDate(tmp.getUTCDate() + 4 - dayNum);
+        const yearStart = new Date(Date.UTC(tmp.getUTCFullYear(), 0, 1));
+        const weekNo = Math.ceil((((tmp - yearStart) / 86400000) + 1) / 7);
+        return `${tmp.getUTCFullYear()}-W${String(weekNo).padStart(2, "0")}`;
+      };
+
+      const computeWeeklyForCategory = (cat, receipts) => {
+        if (!cat || !Array.isArray(receipts)) return [];
+        const bucket = {};
+        receipts.forEach((rec) => {
+          const wk = isoWeekKey(rec.date);
+          if (!wk) return;
+          (rec.items || []).forEach((item) => {
+            if (item.category === cat) {
+              const amt = item.price_float !== undefined ? item.price_float : parsePriceToFloatSafe(item.price);
+              bucket[wk] = (bucket[wk] || 0) + (amt || 0);
+            }
+          });
+        });
+        const entries = Object.entries(bucket)
+          .map(([week, value]) => ({ week, value }))
+          .sort((a, b) => (a.week > b.week ? 1 : -1));
+        return entries;
+      };
+
+      useEffect(() => {
+        loadData(); // one-time load on page view
+      }, []);
+
+      useEffect(() => {
+        if (!canvasRef.current) return;
+        if (chartRef.current) {
+          chartRef.current.destroy();
+          chartRef.current = null;
+        }
+        const entries = Object.entries(totals);
+        if (entries.length === 0) return;
+        const labels = entries.map(([k]) => k);
+        const values = entries.map(([, v]) => v);
+        const colors = labels.map((_, i) => `hsl(${(i * 65) % 360},70%,60%)`);
+        chartRef.current = new Chart(canvasRef.current, {
+          type: "pie",
+          data: {
+            labels,
+            datasets: [{
+              data: values.map((v) => Math.round(v * 100) / 100),
+              backgroundColor: colors,
+            }]
+          },
+          options: {
+            onClick: (_evt, elems) => {
+              if (!elems.length) return;
+              const idx = elems[0].index;
+              const cat = labels[idx];
+              setSelectedCategory((prev) => (prev === cat ? null : cat));
+            },
+            plugins: {
+              legend: { position: "bottom" },
+            }
+          }
+        });
+      }, [totals]);
+
+      const weeklyData = selectedCategory ? computeWeeklyForCategory(selectedCategory, rawData) : [];
+
+      return (
+        <div className="card">
+          <h2>Spend by Category</h2>
+          <div className="small">Data source: receipts OCR/categorized output</div>
+          {loading && <div className="status">Loading...</div>}
+          {error && <div className="status" style={{ color: "#b00020" }}>{error}</div>}
+          {!loading && !error && Object.keys(totals).length === 0 && (
+            <div className="status">No data available.</div>
+          )}
+          {!loading && !error && Object.keys(totals).length > 0 && (
+            <canvas ref={canvasRef} aria-label="Spend by Category"></canvas>
+          )}
+          <LineChart category={selectedCategory} weekly={weeklyData} />
+        </div>
+      );
+    }
+
+    function LineChart({ category, weekly }) {
+      const canvasRef = React.useRef(null);
+      const chartRef = React.useRef(null);
+
+      React.useEffect(() => {
+        if (!category || !weekly || weekly.length === 0) {
+          if (chartRef.current) {
+            chartRef.current.destroy();
+            chartRef.current = null;
+          }
+          return;
+        }
+        const ctx = canvasRef.current;
+        if (!ctx) return;
+        if (chartRef.current) {
+          chartRef.current.destroy();
+          chartRef.current = null;
+        }
+        const labels = weekly.map((w) => w.week);
+        const data = weekly.map((w) => w.value);
+        chartRef.current = new Chart(ctx, {
+          type: "line",
+          data: {
+            labels,
+            datasets: [{
+              label: `${category} spend`,
+              data,
+              borderColor: "rgba(75, 192, 192, 1)",
+              backgroundColor: "rgba(75, 192, 192, 0.2)",
+              tension: 0.3,
+              fill: false,
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: { legend: { display: true } },
+            scales: {
+              x: { title: { display: true, text: "Week" } },
+              y: { title: { display: true, text: "Money spent" } },
+            }
+          }
+        });
+        return () => {
+          if (chartRef.current) chartRef.current.destroy();
+        };
+      }, [category, weekly]);
+
+      if (!category) return null;
+      return (
+        <div className="card" style={{ marginTop: "16px" }}>
+          <h3>{category} Trend</h3>
+          <canvas ref={canvasRef} aria-label="Category Trend"></canvas>
+        </div>
+      );
+    }
+
+    function App() {
+      return (
+        <div className="container">
+          <h1>Dashboard: Category Spend</h1>
+          <div className="small">
+            Read-only view of uploaded receipts, aggregated by category.
+          </div>
+          <ChartCard />
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
+</body>
+</html>

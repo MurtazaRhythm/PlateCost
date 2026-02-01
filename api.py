@@ -11,12 +11,18 @@ from fastapi import FastAPI, UploadFile, File, HTTPException
 from program import run_ocr as run_ocr_image, parse_receipt
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
+from categorize_receipts import categorize_items, build_output
+from generate_insight_sentences import llm_sentences, load_json as load_json_simple, save_json as save_json_simple, build_llm
 
 DATA_DIR = Path("data")
 DATA_DIR.mkdir(exist_ok=True)
+FRONTEND_DIR = Path(__file__).parent / "frontend"
 
 RECEIPTS_FILE = DATA_DIR / "receipts.json"
 OCR_FILE = DATA_DIR / "receipts_ocr.json"
+CATEGORIZED_FILE = DATA_DIR / "receipts_dataset_categorized.json"
+INSIGHTS_FILE = DATA_DIR / "receipts_dataset_insights.json"
 ALLOWED_TYPES = {"image/png", "image/jpeg", "text/plain"}
 
 app = FastAPI()
@@ -26,6 +32,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Serve frontend static files under /static to avoid shadowing API routes
+if FRONTEND_DIR.exists():
+    app.mount("/static", StaticFiles(directory=FRONTEND_DIR, html=True), name="frontend")
 
 
 def load_json(path: Path, default: Any) -> Any:
@@ -134,6 +144,23 @@ async def upload(file: UploadFile = File(...)):
         }
         ocr_list.insert(0, ocr_entry)
         save_json(OCR_FILE, ocr_list)
+        # Auto-categorize after OCR update
+        try:
+            categorized = categorize_items(load_json(OCR_FILE, []))
+            output = build_output(categorized)
+            save_json(CATEGORIZED_FILE, output)
+            # Auto-generate insight sentences
+            try:
+                gen = build_llm()
+                insights = output.get("insights", [])
+                sentences = llm_sentences(gen, insights)
+                for ins, sent in zip(insights, sentences):
+                    ins["ai_sentence"] = sent
+                save_json(INSIGHTS_FILE, {"insights": insights, "receipts": output.get("receipts", [])})
+            except Exception as e:
+                print("Auto-generate insight sentences failed:", e)
+        except Exception as e:
+            print("Auto-categorize failed:", e)
 
     # If text file, parse as JSON receipt and store
     elif file.content_type == "text/plain" and ext == ".txt":
@@ -149,6 +176,23 @@ async def upload(file: UploadFile = File(...)):
             }
             ocr_list.insert(0, ocr_entry)
             save_json(OCR_FILE, ocr_list)
+            # Auto-categorize after OCR update
+            try:
+                categorized = categorize_items(load_json(OCR_FILE, []))
+                output = build_output(categorized)
+                save_json(CATEGORIZED_FILE, output)
+                # Auto-generate insight sentences
+                try:
+                    gen = build_llm()
+                    insights = output.get("insights", [])
+                    sentences = llm_sentences(gen, insights)
+                    for ins, sent in zip(insights, sentences):
+                        ins["ai_sentence"] = sent
+                    save_json(INSIGHTS_FILE, {"insights": insights, "receipts": output.get("receipts", [])})
+                except Exception as e:
+                    print("Auto-generate insight sentences failed:", e)
+            except Exception as e:
+                print("Auto-categorize failed:", e)
 
     return record
 
@@ -174,12 +218,28 @@ def delete_receipt(rid: str):
             p.unlink()
         except Exception:
             pass
+
+    # Rebuild categorized data after deletion
+    try:
+        categorized = categorize_items(load_json(OCR_FILE, []))
+        output = build_output(categorized)
+        save_json(CATEGORIZED_FILE, output)
+    except Exception as e:
+        print("Auto-categorize on delete failed:", e)
+
     return {"deleted": rid}
 
 
 @app.get("/receipts_ocr.json")
 def get_ocr():
     return load_json(OCR_FILE, [])
+
+
+@app.get("/receipts_dataset_categorized.json")
+def get_receipts_dataset_categorized():
+    if not CATEGORIZED_FILE.exists():
+        raise HTTPException(status_code=404, detail="receipts_dataset_categorized.json not found")
+    return load_json(CATEGORIZED_FILE, [])
 
 
 @app.post("/receipts/{rid}/re-extract")
@@ -220,4 +280,26 @@ def re_extract_ocr(rid: str):
 @app.get("/")
 def serve_frontend():
     """Serve the frontend so upload, receipts, etc. work from one server."""
-    return FileResponse(Path(__file__).parent / "frontend" / "index.html")
+    return FileResponse(FRONTEND_DIR / "index.html")
+
+
+@app.get("/index.html")
+def serve_index_html():
+    if (FRONTEND_DIR / "index.html").exists():
+        return FileResponse(FRONTEND_DIR / "index.html")
+    raise HTTPException(status_code=404, detail="Index not found")
+
+
+@app.get("/dashboard.html")
+def serve_dashboard():
+    if (FRONTEND_DIR / "dashboard.html").exists():
+        return FileResponse(FRONTEND_DIR / "dashboard.html")
+    raise HTTPException(status_code=404, detail="Dashboard not found")
+
+
+@app.get("/receipts_dataset_insights.json")
+def get_receipts_dataset_insights():
+    if not INSIGHTS_FILE.exists():
+        raise HTTPException(status_code=404, detail="receipts_dataset_insights.json not found")
+    return load_json(INSIGHTS_FILE, [])
+

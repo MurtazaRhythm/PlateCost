@@ -15,6 +15,4 @@ node_modules/
 # OS
 .DS_Store
 Thumbs.db
-receipts_ocr.json
-receipts.json
-data
+
