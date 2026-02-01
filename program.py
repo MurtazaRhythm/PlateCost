@@ -1,3 +1,4 @@
+# OCR pipeline and receipt text parsing utilities for image uploads.
 import cv2
 import numpy as np
 import easyocr
@@ -7,6 +8,7 @@ import json
 from pathlib import Path
 
 
+# Prepare receipt image to improve OCR accuracy (denoise, contrast, threshold).
 def preprocess_receipt(img_path):
     img = cv2.imread(img_path)
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -31,6 +33,7 @@ def preprocess_receipt(img_path):
     return cv2.morphologyEx(thresh, cv2.MORPH_CLOSE, kernel)
 
 
+# Run EasyOCR on a preprocessed receipt image and normalize common patterns.
 def run_ocr(img_path):
     reader = easyocr.Reader(['en'], gpu=False)  # Initialize EasyOCR reader
     img = preprocess_receipt(img_path)  # Preprocess the image
@@ -48,6 +51,7 @@ def run_ocr(img_path):
     return fixed  # Return the text from the OCR result
 
 #AI helped with this function
+# Parse OCR lines into supplier, date, and items with prices.
 def parse_receipt(lines):
     price_re = re.compile(r'\$\s?\d+(?:[.,]\d{2})?')
     date_re = re.compile(r'\b\d{1,2}/\d{1,2}/\d{2,4}\b')
@@ -123,6 +127,7 @@ def parse_receipt(lines):
     return {"supplier": supplier, "date": date, "items": items}
 
 
+# Save a single parsed receipt and merge it into a dataset file (deduping).
 def save_receipt_json(data, dataset_path="receipts_dataset.json", compact=False):
     """
     Write the single receipt to output_path and append/merge into dataset_path.

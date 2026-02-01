@@ -1,3 +1,4 @@
+# FastAPI backend that handles receipt uploads, OCR, categorization, and serves the frontend.
 import json
 import uuid
 import shutil
@@ -38,6 +39,7 @@ if FRONTEND_DIR.exists():
     app.mount("/static", StaticFiles(directory=FRONTEND_DIR, html=True), name="frontend")
 
 
+# Load JSON helper that tolerates missing/invalid files.
 def load_json(path: Path, default: Any) -> Any:
     if path.exists():
         try:
@@ -47,10 +49,12 @@ def load_json(path: Path, default: Any) -> Any:
     return default
 
 
+# Persist JSON with pretty formatting for downstream readability.
 def save_json(path: Path, data: Any) -> None:
     path.write_text(json.dumps(data, indent=2), encoding="utf-8")
 
 
+# Parse a .txt upload that already contains receipt JSON (non-image path).
 def _parse_json_receipt_txt(txt_path: Path) -> Dict[str, Any] | None:
     """
     Parse a .txt file containing JSON receipt data.
@@ -83,6 +87,7 @@ def _parse_json_receipt_txt(txt_path: Path) -> Dict[str, Any] | None:
         return None
 
 
+# Run OCR on an uploaded image and return normalized receipt data.
 def run_ocr(image_path: Path) -> Dict[str, Any]:
     """
     Run OCR on receipt image using program.py (EasyOCR + parse_receipt).
@@ -109,6 +114,7 @@ def run_ocr(image_path: Path) -> Dict[str, Any]:
         }
 
 
+# Upload endpoint: store the file, run OCR for images, categorize, and regenerate insights.
 @app.post("/upload")
 async def upload(file: UploadFile = File(...)):
     if file.content_type not in ALLOWED_TYPES:
@@ -126,6 +132,7 @@ async def upload(file: UploadFile = File(...)):
     record = {
         "id": rid,
         "filename": saved_path.name,
+        "display_name": Path(file.filename).stem,
         "uploaded_at": datetime.datetime.utcnow().isoformat(),
     }
     receipts.insert(0, record)
@@ -197,6 +204,7 @@ async def upload(file: UploadFile = File(...)):
     return record
 
 
+# List all uploaded receipt metadata
 @app.get("/receipts")
 def list_receipts():
     return load_json(RECEIPTS_FILE, [])
@@ -219,7 +227,7 @@ def delete_receipt(rid: str):
         except Exception:
             pass
 
-    # Rebuild categorized data after deletion
+    # Rebuild categorized data and insights after deletion to keep derived files fresh
     try:
         categorized = categorize_items(load_json(OCR_FILE, []))
         output = build_output(categorized)
@@ -239,11 +247,13 @@ def delete_receipt(rid: str):
     return {"deleted": rid}
 
 
+# Expose raw OCR results
 @app.get("/receipts_ocr.json")
 def get_ocr():
     return load_json(OCR_FILE, [])
 
 
+# Expose categorized receipts and aggregates
 @app.get("/receipts_dataset_categorized.json")
 def get_receipts_dataset_categorized():
     if not CATEGORIZED_FILE.exists():
@@ -251,6 +261,7 @@ def get_receipts_dataset_categorized():
     return load_json(CATEGORIZED_FILE, [])
 
 
+# Re-run OCR for an existing receipt and refresh downstream artifacts
 @app.post("/receipts/{rid}/re-extract")
 def re_extract_ocr(rid: str):
     """Re-run OCR on an already-uploaded receipt (image or JSON .txt)."""
@@ -303,12 +314,14 @@ def re_extract_ocr(rid: str):
     return ocr_entry
 
 
+# Serve upload page
 @app.get("/")
 def serve_frontend():
     """Serve the frontend so upload, receipts, etc. work from one server."""
     return FileResponse(FRONTEND_DIR / "index.html")
 
 
+# Explicit index route for static hosting
 @app.get("/index.html")
 def serve_index_html():
     if (FRONTEND_DIR / "index.html").exists():
@@ -316,6 +329,7 @@ def serve_index_html():
     raise HTTPException(status_code=404, detail="Index not found")
 
 
+# Serve dashboard page
 @app.get("/dashboard.html")
 def serve_dashboard():
     if (FRONTEND_DIR / "dashboard.html").exists():
@@ -323,6 +337,7 @@ def serve_dashboard():
     raise HTTPException(status_code=404, detail="Dashboard not found")
 
 
+# Serve insights page
 @app.get("/insights.html")
 def serve_insights():
     if (FRONTEND_DIR / "insights.html").exists():

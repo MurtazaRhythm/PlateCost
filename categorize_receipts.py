@@ -1,3 +1,4 @@
+# Categorize OCR'd receipt items, aggregate weekly spend, and derive insights.
 import json
 import sys
 import re
@@ -132,6 +133,7 @@ def build_llm():
         return None
 
 #AI helped with this function
+# LLM-assisted categorization for ambiguous item names.
 def batch_llm_categories(gen_pipeline, names: List[str]) -> List[Optional[str]]:
     if gen_pipeline is None or not names:
         return ["Other" for _ in names]
@@ -205,6 +207,7 @@ def batch_llm_categories(gen_pipeline, names: List[str]) -> List[Optional[str]]:
     return results
 
 
+# Categorize every item in each receipt using rules first, then LLM fallbacks.
 def categorize_items(receipts: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     gen = build_llm()
     categorized = []
@@ -274,6 +277,7 @@ def week_key(date_str: str) -> str:
         return "unknown"
 
 
+# Roll up spend per week by category and supplier.
 def aggregate_weekly(receipts: List[Dict[str, Any]]):
     weekly_category: Dict[str, Dict[str, float]] = {}
     weekly_supplier: Dict[str, Dict[str, float]] = {}
@@ -295,6 +299,7 @@ def aggregate_weekly(receipts: List[Dict[str, Any]]):
     return weekly_category, weekly_supplier, week_totals
 
 
+# Derive simple insights (WoW change, spikes, supplier concentration).
 def compute_insights(weekly_category, weekly_supplier, week_totals):
     insights = []
     weeks_sorted = sorted(weekly_category.keys())
@@ -362,6 +367,7 @@ def compute_insights(weekly_category, weekly_supplier, week_totals):
     return insights
 
 
+# Package receipts with weekly aggregates and insights for the frontend.
 def build_output(receipts: List[Dict[str, Any]]) -> Dict[str, Any]:
     weekly_category, weekly_supplier, week_totals = aggregate_weekly(receipts)
     insights = compute_insights(weekly_category, weekly_supplier, week_totals)
@@ -383,6 +389,7 @@ def build_output(receipts: List[Dict[str, Any]]) -> Dict[str, Any]:
     }
 
 
+# CLI entry: load OCR receipts, categorize, aggregate, and write output file.
 def main():
     src = sys.argv[1] if len(sys.argv) > 1 else "data/receipts_ocr.json"
     dest = sys.argv[2] if len(sys.argv) > 2 else "data/receipts_dataset_categorized.json"

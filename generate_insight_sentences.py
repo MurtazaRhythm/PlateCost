@@ -1,3 +1,4 @@
+# Generate concise AI-written sentences for computed receipt insights.
 import json
 import sys
 from pathlib import Path
@@ -24,6 +25,7 @@ def save_json(data: Dict[str, Any], path: str) -> None:
         json.dump(data, f, indent=2, ensure_ascii=False)
 
 
+# Build a lightweight text-generation pipeline if transformers is available.
 def build_llm():
     if AutoModelForCausalLM is None or AutoTokenizer is None or pipeline is None:
         return None
@@ -110,6 +112,7 @@ def _parse_lines(text: str, count: int) -> List[Optional[str]]:
     return results
 
 
+# Generate one sentence per insight; fall back to deterministic templates when LLM output is missing.
 def llm_sentences(gen, insights: List[Dict[str, Any]]) -> List[str]:
     sentences: List[str] = []
     for start in range(0, len(insights), BATCH_SIZE):
@@ -138,6 +141,7 @@ def llm_sentences(gen, insights: List[Dict[str, Any]]) -> List[str]:
     return sentences
 
 
+# CLI entry: load categorized data, attach AI sentences, and write output file.
 def main():
     src = sys.argv[1] if len(sys.argv) > 1 else "receipts_dataset_categorized.json"
     dest = sys.argv[2] if len(sys.argv) > 2 else "receipts_dataset_with_insights.json"

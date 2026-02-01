@@ -7,35 +7,149 @@
   <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    body { font-family: Arial, sans-serif; margin: 24px; background: #f7f7f7; }
-    .container { max-width: 960px; margin: 0 auto; }
-    h1 { margin-bottom: 16px; }
-    .card { background: #fff; padding: 16px; margin-bottom: 12px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center; }
-    .card-actions button { margin-left: 8px; }
-    .panel { background: #fff; padding: 16px; margin-top: 16px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+    :root {
+      --bg: #f4f6fb;
+      --card: #ffffff;
+      --text: #1f2933;
+      --muted: #5f6b7a;
+      --primary: #2563eb;
+      --primary-strong: #1d4ed8;
+      --border: #e5e7eb;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      --radius: 12px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+    }
+    a { color: inherit; text-decoration: none; }
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .brand {
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--primary);
+    }
+    .nav-links {
+      display: flex;
+      gap: 14px;
+      font-weight: 500;
+      color: var(--muted);
+    }
+    .nav-links a { padding: 8px 10px; border-radius: 8px; }
+    .nav-links a:hover { background: #eef2ff; color: var(--primary); }
+    .page {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 24px 20px 48px;
+    }
+    h1 { margin: 8px 0 4px; font-size: 28px; }
+    h2 { margin: 20px 0 10px; }
+    .lead { color: var(--muted); margin-bottom: 16px; }
+    .card {
+      background: var(--card);
+      padding: 16px;
+      margin-bottom: 12px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      border: 1px solid var(--border);
+    }
+    .panel {
+      background: var(--card);
+      padding: 18px;
+      margin-top: 16px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
     .row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+    .card-actions button { margin-left: 8px; }
+    input[type="file"] {
+      padding: 10px;
+      background: #f8fafc;
+      border: 1px dashed var(--border);
+      border-radius: 10px;
+    }
+    button {
+      cursor: pointer;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 14px;
+      background: var(--primary);
+      color: white;
+      font-weight: 600;
+      box-shadow: 0 6px 18px rgba(37, 99, 235, 0.25);
+      transition: transform 0.05s ease, box-shadow 0.15s ease, background 0.15s ease;
+    }
+    button:hover { background: var(--primary-strong); box-shadow: 0 8px 24px rgba(37, 99, 235, 0.35); }
+    button:active { transform: translateY(1px); }
+    .secondary { background: #e5e7eb; color: #111827; box-shadow: none; }
+    .secondary:hover { background: #d1d5db; }
     .error { color: #b00020; margin-top: 8px; }
     .success { color: #0b7a0b; margin-top: 8px; }
     ul { padding-left: 18px; }
-    button { cursor: pointer; }
-    .small { color: #666; font-size: 12px; }
+    .small { color: var(--muted); font-size: 13px; }
+    .list-card { align-items: flex-start; }
+    @media (max-width: 700px) {
+      .card { flex-direction: column; align-items: flex-start; }
+      .nav-inner { flex-direction: column; align-items: flex-start; }
+      .nav-links { width: 100%; justify-content: flex-start; flex-wrap: wrap; }
+    }
   </style>
 </head>
 <body>
+  <header class="nav">
+    <div class="nav-inner">
+      <div class="brand">PlateCost</div>
+      <div class="nav-links">
+        <a href="./index.html">Uploads</a>
+        <a href="./dashboard.html">Dashboard</a>
+        <a href="./insights.html">Insights</a>
+      </div>
+    </div>
+  </header>
   <div id="root"></div>
-  <div style="position: fixed; top: 12px; right: 12px;">
-    <a href="./dashboard.html" style="margin-right:8px;">Dashboard</a>
-    <a href="./insights.html">Insights</a>
-  </div>
   <script type="text/babel">
     const { useState, useEffect } = React;
 
+    // Main upload UI for adding receipts and viewing parsed OCR details.
     const ALLOWED_TYPES = ["image/png", "image/jpeg", "text/plain"];
     const OCR_JSON_PATH = "/receipts_ocr.json";
 
     function formatDate(ts) {
       try { return new Date(ts).toLocaleString(); } catch { return ts; }
+    }
+
+    function displayName(filename) {
+      if (!filename) return "Receipt";
+      const idx = filename.lastIndexOf(".");
+      return idx > 0 ? filename.slice(0, idx) : filename;
     }
 
     async function fetchOCRData() {
@@ -100,6 +214,7 @@
           const receipt = {
             id: data.id || crypto.randomUUID(),
             filename: data.filename || file.name,
+            display_name: data.display_name || file.name.split(".").slice(0, -1).join(".") || file.name,
             uploaded_at: data.uploaded_at || new Date().toISOString(),
           };
           setReceipts((prev) => [receipt, ...prev]);
@@ -152,8 +267,9 @@
       };
 
       return (
-        <div className="container">
+        <div className="page">
           <h1>Receipt Upload</h1>
+          <div className="lead">Upload receipt images or JSON text files to parse and manage.</div>
           <div className="card">
             <div className="row">
               <input type="file" accept=".png,.jpg,.jpeg,.txt" onChange={onFileChange} />
@@ -167,10 +283,10 @@
           <h2>Uploaded Receipts</h2>
           {receipts.length === 0 && <div className="small">No receipts uploaded yet.</div>}
           {receipts.map((r) => (
-            <div key={r.id} className="card">
+            <div key={r.id} className="card list-card">
               <div>
+                <div className="small" style={{ fontWeight: 600 }}>{r.display_name || displayName(r.filename)}</div>
                 <div className="small">{r.filename}</div>
-                <div className="small">Uploaded: {formatDate(r.uploaded_at)}</div>
               </div>
               <div className="card-actions">
                 <button onClick={() => viewReceipt(r)}>View Receipt</button>
