@@ -13,3 +13,5 @@ Our app basically lets small local restaurants upload receipts of their spending
 Were gonna have test receipt txt files and a receipt image that both can be used to upload and analyze.
 
 Many functions might not have the ai comment over it however we both have line suggestions activated for more of a syntax or fixing the formating of texts aspect then a logic one.
+
+We were able to get ai insights on spending to work in our backend but had struggles to display it on the frontend, that would be the next step with creating a more aesthetic frontend in the future.
