@@ -384,7 +384,7 @@ def build_output(receipts: List[Dict[str, Any]]) -> Dict[str, Any]:
 
 
 def main():
-    src = sys.argv[1] if len(sys.argv) > 1 else "receipts_dataset.json"
+    src = sys.argv[1] if len(sys.argv) > 1 else "synthetic_receipts.json"
     dest = sys.argv[2] if len(sys.argv) > 2 else "receipts_dataset_test.json"
 
     receipts = load_receipts(src)
