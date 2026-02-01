@@ -224,6 +224,15 @@ def delete_receipt(rid: str):
         categorized = categorize_items(load_json(OCR_FILE, []))
         output = build_output(categorized)
         save_json(CATEGORIZED_FILE, output)
+        try:
+            gen = build_llm()
+            insights = output.get("insights", [])
+            sentences = llm_sentences(gen, insights)
+            for ins, sent in zip(insights, sentences):
+                ins["ai_sentence"] = sent
+            save_json(INSIGHTS_FILE, {"insights": insights, "receipts": output.get("receipts", [])})
+        except Exception as e:
+            print("Auto-generate insight sentences failed:", e)
     except Exception as e:
         print("Auto-categorize on delete failed:", e)
 
@@ -274,6 +283,23 @@ def re_extract_ocr(rid: str):
     }
     ocr_list.insert(0, ocr_entry)
     save_json(OCR_FILE, ocr_list)
+
+    # Rebuild categorized data and insights after re-extract
+    try:
+        categorized = categorize_items(load_json(OCR_FILE, []))
+        output = build_output(categorized)
+        save_json(CATEGORIZED_FILE, output)
+        try:
+            gen = build_llm()
+            insights = output.get("insights", [])
+            sentences = llm_sentences(gen, insights)
+            for ins, sent in zip(insights, sentences):
+                ins["ai_sentence"] = sent
+            save_json(INSIGHTS_FILE, {"insights": insights, "receipts": output.get("receipts", [])})
+        except Exception as e:
+            print("Auto-generate insight sentences failed:", e)
+    except Exception as e:
+        print("Auto-categorize on re-extract failed:", e)
     return ocr_entry
 
 
@@ -295,6 +321,13 @@ def serve_dashboard():
     if (FRONTEND_DIR / "dashboard.html").exists():
         return FileResponse(FRONTEND_DIR / "dashboard.html")
     raise HTTPException(status_code=404, detail="Dashboard not found")
+
+
+@app.get("/insights.html")
+def serve_insights():
+    if (FRONTEND_DIR / "insights.html").exists():
+        return FileResponse(FRONTEND_DIR / "insights.html")
+    raise HTTPException(status_code=404, detail="Insights page not found")
 
 
 @app.get("/receipts_dataset_insights.json")

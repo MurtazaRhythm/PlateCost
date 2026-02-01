@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Insights</title>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 24px; background: #f7f7f7; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    h1 { margin-bottom: 8px; }
+    .card { background: #fff; padding: 16px; margin-top: 16px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+    .controls { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+    select, button { padding: 6px 10px; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 10px; text-align: left; border-bottom: 1px solid #eee; }
+    th { cursor: pointer; user-select: none; }
+    .pill { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 12px; background: #eef2ff; color: #3949ab; }
+    .status { margin-top: 8px; color: #666; }
+    .error { color: #b00020; }
+    .topnav { position: fixed; top: 12px; right: 12px; display: flex; gap: 10px; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <div class="topnav">
+    <a href="./index.html">Uploads</a>
+    <a href="./dashboard.html">Dashboard</a>
+  </div>
+  <script type="text/babel">
+    const { useEffect, useMemo, useState, useRef } = React;
+    const DATA_URL = "/receipts_dataset_insights.json";
+    const AUTO_REFRESH_MS = 30000;
+
+    function dedupe(arr) {
+      return Array.from(new Set(arr.filter(Boolean))).sort();
+    }
+
+    function sortData(data, sortBy, dir) {
+      const fn = {
+        week: (a, b) => (a.week || "").localeCompare(b.week || ""),
+        category: (a, b) => (a.category || "").localeCompare(b.category || ""),
+        type: (a, b) => (a.type || "").localeCompare(b.type || ""),
+        ai_sentence: (a, b) => (a.ai_sentence || "").localeCompare(b.ai_sentence || "")
+      }[sortBy] || (() => 0);
+      const sorted = [...data].sort(fn);
+      return dir === "desc" ? sorted.reverse() : sorted;
+    }
+
+    function App() {
+      const [insights, setInsights] = useState([]);
+      const [loading, setLoading] = useState(true);
+      const [error, setError] = useState("");
+      const [filters, setFilters] = useState({ week: "", category: "", type: "" });
+      const [sortBy, setSortBy] = useState("week");
+      const [sortDir, setSortDir] = useState("desc");
+      const timerRef = useRef(null);
+
+      const load = async () => {
+        setLoading(true); setError("");
+        try {
+          const res = await fetch(DATA_URL, { cache: "no-cache" });
+          if (!res.ok) throw new Error("fetch_failed");
+          const json = await res.json();
+          const data = Array.isArray(json.insights) ? json.insights : [];
+          setInsights(data);
+        } catch (e) {
+          setError("Unable to load insights. Please ensure data is available.");
+          setInsights([]);
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      useEffect(() => {
+        load();
+        timerRef.current = setInterval(load, AUTO_REFRESH_MS);
+        return () => { if (timerRef.current) clearInterval(timerRef.current); };
+      }, []);
+
+      const weeks = useMemo(() => dedupe(insights.map(i => i.week)), [insights]);
+      const categories = useMemo(() => dedupe(insights.map(i => i.category)), [insights]);
+      const types = useMemo(() => dedupe(insights.map(i => i.type)), [insights]);
+
+      const filtered = useMemo(() => {
+        let rows = insights;
+        if (filters.week) rows = rows.filter(i => i.week === filters.week);
+        if (filters.category) rows = rows.filter(i => i.category === filters.category);
+        if (filters.type) rows = rows.filter(i => i.type === filters.type);
+        return sortData(rows, sortBy, sortDir);
+      }, [insights, filters, sortBy, sortDir]);
+
+      const toggleSort = (col) => {
+        if (sortBy === col) {
+          setSortDir(sortDir === "asc" ? "desc" : "asc");
+        } else {
+          setSortBy(col);
+          setSortDir(col === "week" ? "desc" : "asc");
+        }
+      };
+
+      return (
+        <div className="container">
+          <h1>AI Insights</h1>
+          <div className="card">
+            <div className="controls">
+              <select value={filters.week} onChange={(e) => setFilters({ ...filters, week: e.target.value })}>
+                <option value="">All Weeks</option>
+                {weeks.map(w => <option key={w} value={w}>{w}</option>)}
+              </select>
+              <select value={filters.category} onChange={(e) => setFilters({ ...filters, category: e.target.value })}>
+                <option value="">All Categories</option>
+                {categories.map(c => <option key={c} value={c}>{c}</option>)}
+              </select>
+              <select value={filters.type} onChange={(e) => setFilters({ ...filters, type: e.target.value })}>
+                <option value="">All Types</option>
+                {types.map(t => <option key={t} value={t}>{t}</option>)}
+              </select>
+              <button onClick={() => setFilters({ week: "", category: "", type: "" })}>Reset</button>
+              <button onClick={load}>Refresh</button>
+            </div>
+
+            {loading && <div className="status">Loading…</div>}
+            {error && <div className="status error">{error}</div>}
+            {!loading && !error && filtered.length === 0 && (
+              <div className="status">No insights yet—upload receipts to generate insights.</div>
+            )}
+
+            {!loading && !error && filtered.length > 0 && (
+              <table>
+                <thead>
+                  <tr>
+                    <th onClick={() => toggleSort("week")}>Week {sortBy === "week" ? (sortDir === "asc" ? "▲" : "▼") : ""}</th>
+                    <th onClick={() => toggleSort("type")}>Type {sortBy === "type" ? (sortDir === "asc" ? "▲" : "▼") : ""}</th>
+                    <th onClick={() => toggleSort("category")}>Category {sortBy === "category" ? (sortDir === "asc" ? "▲" : "▼") : ""}</th>
+                    <th onClick={() => toggleSort("ai_sentence")}>AI Sentence {sortBy === "ai_sentence" ? (sortDir === "asc" ? "▲" : "▼") : ""}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filtered.map((ins, idx) => (
+                    <tr key={idx}>
+                      <td>{ins.week || "—"}</td>
+                      <td><span className="pill">{ins.type || "—"}</span></td>
+                      <td>{ins.category || "—"}</td>
+                      <td>{ins.ai_sentence || "—"}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+            <div className="status">Auto-refresh every 30s.</div>
+          </div>
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
+</body>
+</html>
