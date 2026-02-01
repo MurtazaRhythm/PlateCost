@@ -12,4 +12,4 @@ Our app basically lets small local restaurants upload receipts of their spending
 
 Were gonna have test receipt txt files and a receipt image that both can be used to upload and analyze.
 
-Many functions might not have the ai comment over it however we both have line suggestions activated for more of a syntax aspect then a logic one.
+Many functions might not have the ai comment over it however we both have line suggestions activated for more of a syntax or fixing the formating of texts aspect then a logic one.
