@@ -1,0 +1,22 @@
+[
+
+  {
+    "supplier": "Valley Fresh Market",
+    "date": "02/07/2025",
+    "items": [
+      {"name": "Roma Tomatoes", "price": "$3.08"},
+      {"name": "Baby Spinach", "price": "$3.85"},
+      {"name": "Chicken Breast", "price": "$13.20"},
+      {"name": "Eggs (Dozen)", "price": "$4.54"},
+      {"name": "Whole Milk (1gal)", "price": "$5.15"},
+      {"name": "Brown Rice (5lb)", "price": "$8.25"},
+      {"name": "Olive Oil (1L)", "price": "$12.30"},
+      {"name": "Greek Yogurt (Large)", "price": "$9.45"},
+      {"name": "Sparkling Water (12pk)", "price": "$10.25"},
+      {"name": "Avocados (3ct)", "price": "$5.20"},
+      {"name": "Ground Beef (2lb)", "price": "$11.80"},
+      {"name": "Cheddar Cheese Block", "price": "$6.75"}
+    ]
+  }
+]
+ 

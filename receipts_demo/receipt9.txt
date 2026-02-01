@@ -1,0 +1,22 @@
+[{
+    "supplier": "Green Valley Provisions",
+    "date": "03/28/2025",
+    "items": [
+      {"name": "Baby Spinach", "price": "$5.60"},
+      {"name": "Chicken Breast", "price": "$17.95"},
+      {"name": "Whole Milk (1gal)", "price": "$7.15"},
+      {"name": "Brown Rice (5lb)", "price": "$11.15"},
+      {"name": "Olive Oil (1L)", "price": "$16.10"},
+      {"name": "Greek Yogurt (Large)", "price": "$12.80"},
+      {"name": "Basmati Rice (5lb)", "price": "$12.65"},
+      {"name": "Fresh Mozzarella (1lb)", "price": "$9.55"},
+      {"name": "Cage-Free Eggs (Dozen)", "price": "$6.15"},
+      {"name": "Honey Granola (2lb)", "price": "$7.25"},
+      {"name": "Kale Bunches", "price": "$4.40"},
+      {"name": "Sliced Turkey Breast (1lb)", "price": "$8.95"},
+      {"name": "Strawberries (2lb)", "price": "$7.25"},
+      {"name": "Coconut Water (6pk)", "price": "$9.65"},
+      {"name": "Rustic Baguettes (2ct)", "price": "$4.85"},
+      {"name": "Parmesan Wedge", "price": "$7.60"}
+    ]
+  }]

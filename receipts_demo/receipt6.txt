@@ -1,0 +1,18 @@
+ [ {
+    "supplier": "Harbor Wholesale Foods",
+    "date": "03/07/2025",
+    "items": [
+      {"name": "Baby Spinach", "price": "$4.90"},
+      {"name": "Chicken Breast", "price": "$15.95"},
+      {"name": "Whole Milk (1gal)", "price": "$6.35"},
+      {"name": "Brown Rice (5lb)", "price": "$9.95"},
+      {"name": "Olive Oil (1L)", "price": "$14.60"},
+      {"name": "Greek Yogurt (Large)", "price": "$11.35"},
+      {"name": "Avocados (3ct)", "price": "$6.75"},
+      {"name": "Basmati Rice (5lb)", "price": "$10.95"},
+      {"name": "Broccoli Crowns (2lb)", "price": "$4.70"},
+      {"name": "Fresh Mozzarella (1lb)", "price": "$8.35"},
+      {"name": "Cage-Free Eggs (Dozen)", "price": "$5.35"},
+      {"name": "Honey Granola (2lb)", "price": "$6.20"}
+    ]
+  } ]
