@@ -13,6 +13,6 @@ To see the trends on the graph you need to upload multiple receipts (within the 
 
 Were gonna have test receipt txt files and a receipt image that both can be used to upload and analyze.
 
-Many functions might not have the ai comment over it however we both have line suggestions activated for more of a syntax or text parsing aspect then a logic one.
+Some functions might not have the ai comment over it because it might not be ai generated however we both have line suggestions activated for more of a syntax or text parsing aspect then a logic one and those were used.
 
 A big part of the aesthetics of the frontend were prompted because its purely visual and doesn't have much importance with our project concept.
