@@ -1,0 +1,186 @@
+[
+  {
+    "id": "9ef20c4d-1fe0-4e30-b8c3-1c1421b5fa89",
+    "filename": "9ef20c4d-1fe0-4e30-b8c3-1c1421b5fa89.txt",
+    "supplier": "Valley Fresh Market",
+    "date": "01/31/2025",
+    "items": [
+      {
+        "name": "Roma Tomatoes",
+        "price": "$2.80",
+        "category": ""
+      },
+      {
+        "name": "Baby Spinach",
+        "price": "$3.50",
+        "category": ""
+      },
+      {
+        "name": "Chicken Breast",
+        "price": "$12.00",
+        "category": ""
+      },
+      {
+        "name": "Eggs (Dozen)",
+        "price": "$4.20",
+        "category": ""
+      },
+      {
+        "name": "Whole Milk (1gal)",
+        "price": "$4.90",
+        "category": ""
+      },
+      {
+        "name": "Brown Rice (5lb)",
+        "price": "$7.60",
+        "category": ""
+      },
+      {
+        "name": "Olive Oil (1L)",
+        "price": "$11.50",
+        "category": ""
+      },
+      {
+        "name": "Black Beans (Canned)",
+        "price": "$1.60",
+        "category": ""
+      },
+      {
+        "name": "Greek Yogurt (Large)",
+        "price": "$8.90",
+        "category": ""
+      },
+      {
+        "name": "Sparkling Water (12pk)",
+        "price": "$9.50",
+        "category": ""
+      }
+    ]
+  },
+  {
+    "id": "ddcc0a32-48f3-45ac-bfe7-62ee17bc1961",
+    "filename": "ddcc0a32-48f3-45ac-bfe7-62ee17bc1961.png",
+    "supplier": "THE SILICON VALLEY SPROUT",
+    "date": "01/31/2026",
+    "items": [
+      {
+        "name": "Honeycrisp Apples",
+        "price": "$7.50",
+        "category": ""
+      },
+      {
+        "name": "Organic Baby Spinach",
+        "price": "$4.00",
+        "category": ""
+      },
+      {
+        "name": "Organic Chicken Breast",
+        "price": "$12.50",
+        "category": ""
+      },
+      {
+        "name": "Grass-Fed Ground Beef",
+        "price": "$9.00",
+        "category": ""
+      },
+      {
+        "name": "Greek Yogurt (Large)",
+        "price": "$9.00",
+        "category": ""
+      },
+      {
+        "name": "Salted Butter",
+        "price": "$6.25",
+        "category": ""
+      },
+      {
+        "name": "Salted Butter",
+        "price": "$5.25",
+        "category": ""
+      },
+      {
+        "name": "Quinoa (Pre-washed)",
+        "price": "$5.50",
+        "category": ""
+      },
+      {
+        "name": "Sparkling Water (6pk)",
+        "price": "$4.50",
+        "category": ""
+      },
+      {
+        "name": "Ginger Kombucha",
+        "price": "$6.25",
+        "category": ""
+      },
+      {
+        "name": "Eco-Frientlly Dish Soap",
+        "price": "$6.25",
+        "category": ""
+      }
+    ]
+  },
+  {
+    "id": "ab1f7114-5c9c-4c76-9e99-b0c176bf562a",
+    "filename": "ab1f7114-5c9c-4c76-9e99-b0c176bf562a.png",
+    "supplier": "THE SILICON VALLEY SPROUT",
+    "date": "01/31/2026",
+    "items": [
+      {
+        "name": "Honeycrisp Apples",
+        "price": "$7.50",
+        "category": ""
+      },
+      {
+        "name": "Organic Baby Spinach",
+        "price": "$4.00",
+        "category": ""
+      },
+      {
+        "name": "Organic Chicken Breast",
+        "price": "$12.50",
+        "category": ""
+      },
+      {
+        "name": "Grass-Fed Ground Beef",
+        "price": "$9.00",
+        "category": ""
+      },
+      {
+        "name": "Greek Yogurt (Large)",
+        "price": "$9.00",
+        "category": ""
+      },
+      {
+        "name": "Salted Butter",
+        "price": "$6.25",
+        "category": ""
+      },
+      {
+        "name": "Salted Butter",
+        "price": "$5.25",
+        "category": ""
+      },
+      {
+        "name": "Quinoa (Pre-washed)",
+        "price": "$5.50",
+        "category": ""
+      },
+      {
+        "name": "Sparkling Water (6pk)",
+        "price": "$4.50",
+        "category": ""
+      },
+      {
+        "name": "Ginger Kombucha",
+        "price": "$6.25",
+        "category": ""
+      },
+      {
+        "name": "Eco-Frientlly Dish Soap",
+        "price": "$6.25",
+        "category": ""
+      }
+    ]
+  }
+]

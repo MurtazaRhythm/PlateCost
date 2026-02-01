@@ -1,0 +1,16 @@
+[{
+    "supplier": "Valley Fresh Market",
+    "date": "01/31/2025",
+    "items": [
+      {"name": "Roma Tomatoes", "price": "$2.80"},
+      {"name": "Baby Spinach", "price": "$3.50"},
+      {"name": "Chicken Breast", "price": "$12.00"},
+      {"name": "Eggs (Dozen)", "price": "$4.20"},
+      {"name": "Whole Milk (1gal)", "price": "$4.90"},
+      {"name": "Brown Rice (5lb)", "price": "$7.60"},
+      {"name": "Olive Oil (1L)", "price": "$11.50"},
+      {"name": "Black Beans (Canned)", "price": "$1.60"},
+      {"name": "Greek Yogurt (Large)", "price": "$8.90"},
+      {"name": "Sparkling Water (12pk)", "price": "$9.50"}
+    ]
+  }]

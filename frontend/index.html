@@ -6,6 +6,7 @@
   <title>Receipt Upload & Management</title>
   <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <style>
     body { font-family: Arial, sans-serif; margin: 24px; background: #f7f7f7; }
     .container { max-width: 960px; margin: 0 auto; }
@@ -23,7 +24,7 @@
 </head>
 <body>
   <div id="root"></div>
-  <script type="text/javascript">
+  <script type="text/babel">
     const { useState, useEffect } = React;
 
     const ALLOWED_TYPES = ["image/png", "image/jpeg", "text/plain"];
@@ -128,6 +129,24 @@
         setParsed(match || null);
       };
 
+      const reExtractOCR = async () => {
+        if (!selected) return;
+        setError("");
+        setMessage("Extracting...");
+        try {
+          const res = await fetch(`/receipts/${encodeURIComponent(selected.id)}/re-extract`, {
+            method: "POST",
+          });
+          if (!res.ok) throw new Error("Re-extract failed");
+          const data = await res.json();
+          setParsed(data);
+          setMessage("Re-extraction complete.");
+        } catch {
+          setError("Re-extract failed. Is it an image file?");
+          setMessage("");
+        }
+      };
+
       return (
         <div className="container">
           <h1>Receipt Upload</h1>
@@ -160,7 +179,10 @@
             <div className="panel">
               <div className="row" style={{ justifyContent: "space-between" }}>
                 <h3>Parsed Receipt Info</h3>
-                <button onClick={() => { setSelected(null); setParsed(null); }}>Close</button>
+                <div className="card-actions">
+                  <button onClick={reExtractOCR}>Re-extract from image</button>
+                  <button onClick={() => { setSelected(null); setParsed(null); }}>Close</button>
+                </div>
               </div>
               {parsed ? (
                 <>
